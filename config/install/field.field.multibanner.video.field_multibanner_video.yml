@@ -18,7 +18,8 @@ default_value: {  }
 default_value_callback: ''
 settings:
   allowed_providers:
+    youtube_minimal: youtube_minimal
     vimeo: vimeo
-    youtube: youtube
+    youtube: '0'
     youtube_playlist: '0'
 field_type: video_embed_field

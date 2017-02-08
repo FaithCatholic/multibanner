@@ -2,47 +2,54 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.multibanner.flex
     - field.field.multibanner.image.field_multibanner_image
     - field.field.multibanner.image.field_multibanner_link
     - field.field.multibanner.image.field_multibanner_teaser
-    - image.style.thumbnail
+    - image.style.multibanner_large
     - multibanner.bundle.image
   module:
     - image
     - link
-id: multibanner.image.default
+id: multibanner.image.flex
 targetEntityType: multibanner
 bundle: image
-mode: default
+mode: flex
 content:
   field_multibanner_image:
     weight: 1
+    label: hidden
     settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
+      image_style: multibanner_large
+      image_link: ''
     third_party_settings: {  }
-    type: image_image
+    type: image
   field_multibanner_link:
-    weight: 4
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-    type: link_default
-  field_multibanner_teaser:
     weight: 3
+    label: hidden
     settings:
-      size: 60
-      placeholder: ''
+      trim_length: null
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
     third_party_settings: {  }
-    type: string_textfield
+    type: link
+  field_multibanner_teaser:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
   name:
-    type: string_textfield
+    label: hidden
+    type: string
     weight: 0
     settings:
-      size: 60
-      placeholder: ''
+      link_to_entity: false
     third_party_settings: {  }
 hidden:
   created: true
+  thumbnail: true
   uid: true

@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.multibanner.field_multibanner_teaser
+    - multibanner.bundle.image
+id: multibanner.image.field_multibanner_teaser
+field_name: field_multibanner_teaser
+entity_type: multibanner
+bundle: image
+label: Teaser
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

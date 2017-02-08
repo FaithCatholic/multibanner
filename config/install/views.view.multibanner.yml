@@ -2,11 +2,13 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.multibanner.flex
     - image.style.thumbnail
   module:
     - image
     - multibanner
     - node
+    - options
     - user
 id: multibanner
 label: Multibanner
@@ -28,7 +30,7 @@ display:
         options:
           perm: 'view multibanner'
       cache:
-        type: tag
+        type: none
         options: {  }
       query:
         type: views_query
@@ -153,8 +155,47 @@ display:
           entity_type: multibanner
           entity_field: status
           plugin_id: boolean
+        field_multibanner_layout_value:
+          id: field_multibanner_layout_value
+          table: node__field_multibanner_layout
+          field: field_multibanner_layout_value
+          relationship: reverse__node__field_multibanner
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            default: default
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: true
+          plugin_id: list_field
       sorts: {  }
-      title: Multibanner
+      title: ''
       header: {  }
       footer: {  }
       empty: {  }
@@ -166,7 +207,7 @@ display:
           relationship: none
           group_type: group
           admin_label: field_multibanner
-          required: false
+          required: true
           entity_type: multibanner
           plugin_id: entity_reverse
       arguments:
@@ -210,6 +251,7 @@ display:
       filter_groups:
         operator: AND
         groups: {  }
+      show_admin_links: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -218,10 +260,10 @@ display:
         - url
         - user.permissions
       tags: {  }
-  block_1:
+  block_default:
     display_plugin: block
-    id: block_1
-    display_title: Block
+    id: block_default
+    display_title: 'Default block'
     position: 2
     display_options:
       display_extenders: {  }
@@ -230,6 +272,129 @@ display:
       block_description: 'Multibanner (default)'
       allow:
         items_per_page: false
+      display_description: ''
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - user.permissions
+      tags: {  }
+  block_flex:
+    display_plugin: block
+    id: block_flex
+    display_title: 'Flex block'
+    position: 3
+    display_options:
+      display_extenders: {  }
+      block_description: 'Multibanner (flex)'
+      block_category: Multibanner
+      allow:
+        items_per_page: false
+      block_hide_empty: true
+      style:
+        type: html_list
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: false
+          type: ul
+          wrapper_class: ''
+          class: ''
+      defaults:
+        style: false
+        row: false
+        filters: false
+        filter_groups: false
+      row:
+        type: 'entity:multibanner'
+        options:
+          relationship: none
+          view_mode: flex
+      display_description: ''
+      filters:
+        status:
+          id: status
+          table: multibanner_field_data
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: multibanner
+          entity_field: status
+          plugin_id: boolean
+        field_multibanner_layout_value:
+          id: field_multibanner_layout_value
+          table: node__field_multibanner_layout
+          field: field_multibanner_layout_value
+          relationship: reverse__node__field_multibanner
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            flex: flex
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: true
+          plugin_id: list_field
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
     cache_metadata:
       max-age: -1
       contexts:

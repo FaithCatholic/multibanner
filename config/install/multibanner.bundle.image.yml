@@ -4,8 +4,10 @@ dependencies: {  }
 id: image
 label: Image
 description: 'Create an image banner.'
-type: generic
+type: image
 queue_thumbnail_downloads: false
 new_revision: false
-type_configuration: {  }
+type_configuration:
+  source_field: field_multibanner_image
+  gather_exif: '0'
 field_map: {  }

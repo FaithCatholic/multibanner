@@ -52,12 +52,12 @@
 }
 
 /* line 64, scss/multibanner_type_slider.scss */
-.view-multibanner.view-display-id-block_flex .field--name-name {
+.view-multibanner.view-display-id-block_default .field--name-name {
   font-size: 2.75em;
 }
 @media (max-width: 1000px) {
   /* line 64, scss/multibanner_type_slider.scss */
-  .view-multibanner.view-display-id-block_flex .field--name-name {
+  .view-multibanner.view-display-id-block_default .field--name-name {
     font-size: 1.65em;
   }
 }

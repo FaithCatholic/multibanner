@@ -10,3 +10,15 @@ new_revision: false
 type_configuration:
   source_field: field_multibanner_video
 field_map: {  }
+langcode: en
+status: true
+dependencies: {  }
+id: video
+label: Video
+description: 'Create a video banner.'
+type: video_embed_field
+queue_thumbnail_downloads: false
+new_revision: false
+type_configuration:
+  source_field: field_multibanner_video
+field_map: {  }

@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies: {  }
+name: multibanner_large
+label: 'Multibanner large'
+effects:
+  0771ef22-0173-446a-be2b-0c21a013b430:
+    uuid: 0771ef22-0173-446a-be2b-0c21a013b430
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1200
+      height: 675

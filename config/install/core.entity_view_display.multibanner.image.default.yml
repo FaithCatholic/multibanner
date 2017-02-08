@@ -3,9 +3,13 @@ status: true
 dependencies:
   config:
     - field.field.multibanner.image.field_multibanner_image
+    - field.field.multibanner.image.field_multibanner_link
+    - field.field.multibanner.image.field_multibanner_teaser
+    - image.style.multibanner_large
     - multibanner.bundle.image
   module:
     - image
+    - link
 id: multibanner.image.default
 targetEntityType: multibanner
 bundle: image
@@ -15,10 +19,28 @@ content:
     weight: 1
     label: hidden
     settings:
-      image_style: ''
+      image_style: multibanner_large
       image_link: ''
     third_party_settings: {  }
     type: image
+  field_multibanner_link:
+    weight: 3
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+  field_multibanner_teaser:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
   name:
     label: hidden
     type: string

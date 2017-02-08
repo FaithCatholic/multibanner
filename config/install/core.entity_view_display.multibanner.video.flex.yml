@@ -2,14 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.multibanner.flex
     - field.field.multibanner.video.field_multibanner_video
     - multibanner.bundle.video
   module:
     - video_embed_field
-id: multibanner.video.default
+id: multibanner.video.flex
 targetEntityType: multibanner
 bundle: video
-mode: default
+mode: flex
 content:
   field_multibanner_video:
     weight: 0

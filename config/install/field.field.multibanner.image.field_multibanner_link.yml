@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.multibanner.field_multibanner_link
+    - multibanner.bundle.image
+  module:
+    - link
+id: multibanner.image.field_multibanner_link
+field_name: field_multibanner_link
+entity_type: multibanner
+bundle: image
+label: Link
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - multibanner
+id: multibanner.flex
+label: Flex
+targetEntityType: multibanner
+cache: true
