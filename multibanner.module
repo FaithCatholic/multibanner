@@ -41,9 +41,8 @@ function multibanner_theme() {
       'template' => 'multibanner',
     ],
     'views_view_multibanner' => [
-      'render element' => 'elements',
       'file' => 'multibanner.theme.inc',
-      'template' => 'views_view_multibanner',
+      'render element' => 'elements',
     ],
   ];
 }

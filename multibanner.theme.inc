@@ -98,8 +98,8 @@ function multibanner_preprocess_views_view(&$variables) {
   $variables['banner_count'] = $banner_count;
 
   // Assign template classes.
-  $variables['attributes']['class'][] = 'multibanners';
-  $variables['attributes']['class'][] = 'multibanners-count-'. $banner_count;
+  $variables['attributes']['class'][] = 'multibanner';
+  $variables['attributes']['class'][] = 'multibanner-count-'. $banner_count;
 
   // Finish rendering.
   template_preprocess_views_view_unformatted($variables);

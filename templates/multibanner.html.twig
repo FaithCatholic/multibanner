@@ -12,8 +12,26 @@
  * @ingroup themeable
  */
 #}
-<article{{ attributes }}>
-  {% if content %}
-    {{ content }}
+<div{{ attributes.addClass('banner') }}>
+  {% if content.field_multibanner_image %}
+    {{ content.field_multibanner_image }}
   {% endif %}
-</article>
+  {% if content.field_multibanner_video %}
+    {{ content.field_multibanner_video }}
+  {% endif %}
+  <div class="banner-content">
+    <div class="banner-content-inner">
+    {% for key, value in content %}
+      {% set prefix = '' %}
+      {% set suffix = '' %}
+      {% if key != 'field_multibanner_image' and key != 'field_multibanner_video' and key != 'field_multibanner_link' %}
+        {% if key == 'name' and content.field_multibanner_link|render %}
+          {% set prefix = prefix ~ '<a href="' ~ content.field_multibanner_link[0]['#plain_text'] ~ '" class="banner-link">' %}
+          {% set suffix = '</a>' %}
+        {% endif %}
+        {{ prefix|raw }}{{ value }}{{ suffix|raw }}
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+</div>
