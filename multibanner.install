@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * @file
+ * Install, uninstall and update hooks for multibanner module.
+ */
+
+/**
+ * Checks if required version of the Entity API is installed.
+ *
+ * @return bool
+ *   TRUE if dependency is met and FALSE if not.
+ */
+function _multibanner_check_entity_version() {
+  if (\Drupal::moduleHandler()->moduleExists('entity')) {
+    $info = system_get_info('module', 'entity');
+    if (version_compare($info['version'], '8.x-1.0-alpha3') >= 0) {
+      return TRUE;
+    }
+  }
+
+  return FALSE;
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function multibanner_requirements($phase) {
+  $requirements = [];
+  if ($phase == 'update' && !_multibanner_check_entity_version()) {
+    $requirements['entity'] = [
+      'title' => t('multibanner'),
+      'value' => t('Entity API missing'),
+      'description' => t(
+        '<a href=":url">Entity API >= 8.x-1.0-alpha3</a> module is now a dependency and needs to be installed before running updates.',
+        [':url' => 'https://www.drupal.org/project/entity']
+      ),
+      'severity' => REQUIREMENT_ERROR,
+    ];
+  }
+  return $requirements;
+}
+
+/**
+ * Implements hook_install().
+ */
+function multibanner_install() {
+  $source = drupal_get_path('module', 'multibanner') . '/images/icons';
+  $destination = \Drupal::config('multibanner.settings')->get('icon_base');
+  multibanner_copy_icons($source, $destination);
+}

@@ -1,0 +1,21 @@
+administer multibanner:
+  title: 'Administer multibanner'
+  restrict access: TRUE
+administer multibanner bundles:
+  title: 'Administer multibanner bundles'
+  restrict access: TRUE
+access multibanner overview:
+  title: 'Access the Multibanner overview page'
+  description: 'Get an overview of all multibanner items.'
+view multibanner:
+  title: 'View multibanner'
+update multibanner:
+  title: 'Update multibanner'
+update any multibanner:
+  title: 'Update any multibanner'
+delete multibanner:
+  title:  'Delete multibanner'
+delete any multibanner:
+  title:  'Delete any multibanner'
+create multibanner:
+  title: 'Create multibanner'

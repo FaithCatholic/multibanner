@@ -1,0 +1,4 @@
+services:
+  plugin.manager.multibanner.type:
+    class: Drupal\multibanner\MultibannerTypeManager
+    parent: default_plugin_manager

@@ -1,0 +1,14 @@
+entity.multibanner.multiple_delete_confirm:
+  path: '/admin/content/multibanner/delete'
+  defaults:
+    _form: '\Drupal\multibanner\Form\DeleteMultiple'
+  requirements:
+    _permission: 'delete any multibanner'
+
+entity.multibanner_bundle.collection:
+  path: '/admin/structure/multibanner'
+  defaults:
+    _entity_list: 'multibanner_bundle'
+    _title: 'Multibanner bundles'
+  requirements:
+    _permission: 'administer multibanner bundles'

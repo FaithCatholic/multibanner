@@ -1,0 +1,12 @@
+multibanner.bundle_add:
+  route_name: entity.multibanner_bundle.add_form
+  title: 'Add multibanner type'
+  appears_on:
+    - entity.multibanner_bundle.collection
+
+multibanner.add:
+  route_name: entity.multibanner.add_page
+  title: 'Add multibanner'
+  weight: 10
+  appears_on:
+    - view.multibanner.multibanner_page_list

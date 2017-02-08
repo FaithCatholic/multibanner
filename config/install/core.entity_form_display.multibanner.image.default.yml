@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.multibanner.image.field_multibanner_image
+    - image.style.thumbnail
+    - multibanner.bundle.image
+  module:
+    - image
+id: multibanner.image.default
+targetEntityType: multibanner
+bundle: image
+mode: default
+content:
+  field_multibanner_image:
+    weight: 1
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+  name:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  uid: true

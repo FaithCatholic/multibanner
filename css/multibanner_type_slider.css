@@ -1,0 +1,63 @@
+/* line 6, scss/multibanner_type_slider.scss */
+.unslider {
+  position: relative;
+}
+/* line 9, scss/multibanner_type_slider.scss */
+.unslider .unslider-arrow {
+  background: #010101;
+  bottom: 50%;
+  color: #fefefe;
+  font-size: 0.75em;
+  letter-spacing: 0.15em;
+  margin-bottom: -2.25em;
+  padding: 1.5em;
+  text-transform: uppercase;
+  z-index: 20;
+}
+/* line 20, scss/multibanner_type_slider.scss */
+.unslider .unslider-arrow.prev {
+  left: 0;
+}
+/* line 24, scss/multibanner_type_slider.scss */
+.unslider .unslider-arrow.next {
+  right: 0;
+}
+/* line 28, scss/multibanner_type_slider.scss */
+.unslider .unslider-arrow:hover {
+  background: #fefefe;
+  color: #010101;
+}
+/* line 34, scss/multibanner_type_slider.scss */
+.unslider .unslider-nav {
+  bottom: 0;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+/* line 40, scss/multibanner_type_slider.scss */
+.unslider .unslider-nav ol {
+  background: #fefefe;
+  display: inline-block;
+  padding: 1em;
+  position: relative;
+  z-index: 20;
+}
+/* line 47, scss/multibanner_type_slider.scss */
+.unslider .unslider-nav ol li {
+  border-color: #010101;
+}
+/* line 50, scss/multibanner_type_slider.scss */
+.unslider .unslider-nav ol li.unslider-active {
+  background: #010101;
+}
+
+/* line 64, scss/multibanner_type_slider.scss */
+.multibanners-type-slider .field--name-name {
+  font-size: 2.75em;
+}
+@media (max-width: 1000px) {
+  /* line 64, scss/multibanner_type_slider.scss */
+  .multibanners-type-slider .field--name-name {
+    font-size: 1.65em;
+  }
+}

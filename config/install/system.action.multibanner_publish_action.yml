@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - multibanner
+id: multibanner_publish_action
+label: 'Publish multibanner'
+type: multibanner
+plugin: multibanner_publish_action
+configuration: {  }

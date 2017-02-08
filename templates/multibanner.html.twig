@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * Default theme implementation.
+ *
+ * Available variables:
+ * - name: Name of the multibanner.
+ * - content: Multibanner content.
+ *
+ * @see template_preprocess_multibanner()
+ *
+ * @ingroup themeable
+ */
+#}
+<article{{ attributes }}>
+  {% if content %}
+    {{ content }}
+  {% endif %}
+</article>

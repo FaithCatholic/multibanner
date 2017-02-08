@@ -1,0 +1,9 @@
+entity.multibanner.edit_form:
+  route_name: entity.multibanner.edit_form
+  group: multibanner
+  title: Edit
+entity.multibanner.delete_form:
+  route_name: entity.multibanner.delete_form
+  group: multibanner
+  title: Delete
+  weight: 10

@@ -1,0 +1,69 @@
+multibanner.settings:
+  type: config_object
+  label: 'multibanner settings'
+  mapping:
+    icon_base:
+      type: string
+      label: 'Base folder for icons installation'
+
+multibanner.bundle.*:
+  type: config_entity
+  label: 'Multibanner bundle'
+  mapping:
+    id:
+      type: string
+      label: 'Machine name'
+    label:
+      type: label
+      label: 'Label'
+    description:
+      type: text
+      label: 'Description'
+    type:
+      type: string
+      label: 'Type plugin ID'
+    queue_thumbnail_downloads:
+      type: boolean
+      label: 'Queue thumbnail downloads'
+    new_revision:
+      type: boolean
+      label: 'Whether a new revision should be created by default'
+    type_configuration:
+      type: multibanner.bundle.type.[%parent.type]
+    field_map:
+      type: sequence
+      label: 'Field map'
+      sequence:
+        type: string
+    third_party_settings:
+      type: sequence
+      label: 'Third party settings'
+      sequence:
+        type: multibanner.bundle.third_party.[%key]
+
+action.configuration.multibanner_delete_action:
+  type: action_configuration_default
+  label: 'Delete multibanner configuration'
+
+action.configuration.multibanner_save_action:
+  type: action_configuration_default
+  label: 'Save multibanner configuration'
+
+action.configuration.multibanner_publish_action:
+  type: action_configuration_default
+  label: 'Publish multibanner configuration'
+
+action.configuration.multibanner_unpublish_action:
+  type: action_configuration_default
+  label: 'Unpublish multibanner configuration'
+
+field.formatter.settings.multibanner_thumbnail:
+  type: mapping
+  label: 'Multibanner thumbnail field display format settings'
+  mapping:
+    image_link:
+      type: string
+      label: 'Link image to'
+    image_style:
+      type: string
+      label: 'Image style'

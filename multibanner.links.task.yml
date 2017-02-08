@@ -1,0 +1,21 @@
+entity.multibanner.canonical:
+  route_name: entity.multibanner.canonical
+  base_route: entity.multibanner.canonical
+  title: 'View'
+entity.multibanner.edit_form:
+  route_name: entity.multibanner.edit_form
+  base_route: entity.multibanner.canonical
+  title: Edit
+entity.multibanner.delete_form:
+  route_name: entity.multibanner.delete_form
+  base_route: entity.multibanner.canonical
+  title: Delete
+  weight: 10
+entity.multibanner_bundle.edit_form:
+  title: 'Edit'
+  route_name: entity.multibanner_bundle.edit_form
+  base_route: entity.multibanner_bundle.edit_form
+entity.multibanner_bundle.collection:
+  title: List
+  route_name: entity.multibanner_bundle.collection
+  base_route: entity.multibanner_bundle.collection

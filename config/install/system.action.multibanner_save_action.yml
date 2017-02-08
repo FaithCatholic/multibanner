@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - multibanner
+id: multibanner_save_action
+label: 'Save multibanner'
+type: multibanner
+plugin: multibanner_save_action
+configuration: {  }

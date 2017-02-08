@@ -1,0 +1,131 @@
+<?php
+
+/**
+ * @file
+ * Provides multibanner entities.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Template\Attribute;
+
+/**
+ * Implements hook_help().
+ */
+function multibanner_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.multibanner':
+      $output = '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The <a href=":multibanner_url">Multibanner</a> module provides a "base" entity for multibanner. This is a very basic entity which can reference to all kinds of multibanner-objects (local files, YouTube videos, Tweets, Instagram photos, ...). multibanner provides a relation between your website and the multibanner resource. You can reference to/use this entity within any other entity on your site. For more information, see the <a href=":multibanner_handbook">online documentation for the Multibanner module</a>.',
+          [
+            ':multibanner_url' => 'https://www.drupal.org/project/multibanner',
+            ':multibanner_handbook' => 'https://drupal-multibanner.gitbooks.io/drupal8-guide/content/modules/multibanner/intro.html',
+          ]) . '</p>';
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<p>' . t('For detailed information about the usage of this module please refer to <a href=":multibanner_handbook">the official documentation</a>.',
+          [
+            ':multibanner_handbook' => 'https://drupal-multibanner.gitbooks.io/drupal8-guide/content/modules/multibanner/intro.html',
+          ]) . '</p>';
+
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function multibanner_theme() {
+  return [
+    'multibanner' => [
+      'render element' => 'elements',
+      'file' => 'multibanner.theme.inc',
+      'template' => 'multibanner',
+    ],
+    'views_view_multibanner' => [
+      'render element' => 'elements',
+      'file' => 'multibanner.theme.inc',
+      'template' => 'views_view_multibanner',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function multibanner_theme_suggestions_multibanner(array $variables) {
+  $suggestions = [];
+  $multibanner = $variables['elements']['#multibanner'];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+  $suggestions[] = 'multibanner__' . $sanitized_view_mode;
+  $suggestions[] = 'multibanner__' . $multibanner->bundle();
+  $suggestions[] = 'multibanner__' . $multibanner->bundle() . '__' . $sanitized_view_mode;
+  $suggestions[] = 'multibanner__' . $multibanner->id();
+  $suggestions[] = 'multibanner__' . $multibanner->id() . '__' . $sanitized_view_mode;
+
+  return $suggestions;
+}
+
+/**
+ * Copy the multibanner file icons to files directory for use with image styles.
+ *
+ * @param string $source
+ *   Source folder.
+ * @param string $destination
+ *   Destination folder.
+ *
+ * @throws Exception
+ */
+function multibanner_copy_icons($source, $destination) {
+  if (!file_prepare_directory($destination, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
+    throw new Exception("Unable to create directory $destination.");
+  }
+
+  $files = file_scan_directory($source, '/.*\.(png|jpg)$/');
+  foreach ($files as $file) {
+    $result = file_unmanaged_copy($file->uri, $destination, FILE_EXISTS_REPLACE);
+    if (!$result) {
+      throw new Exception("Unable to copy {$file->uri} to $destination.");
+    }
+  }
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function multibanner_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
+  if (array_key_exists('entities', $element)) {
+    if ($element['entities']['#entity_type'] === 'multibanner') {
+      // Hide "add" buttons after nine banners.
+      $num_entities = 0;
+      foreach ($element['entities'] as $key => $value) {
+        if (is_numeric($key)) {
+          $num_entities++;
+        }
+      }
+      if ($num_entities >= 9) {
+        if (array_key_exists('ief_add', $element['actions'])) {
+          $element['actions']['ief_add']['#access'] = FALSE;
+        }
+        if (array_key_exists('ief_add_existing', $element['actions'])) {
+          $element['actions']['ief_add_existing']['#access'] = FALSE;
+        }
+        $element['#description'] = t('<p><em>You may add <strong style="color:orange;">0 additional banner(s)</strong>. You have reached the limit of 9.</em></p>');
+      } else {
+        $left = (string) 9 - $num_entities;
+        $element['#description'] = t('<p><em>You may add up to <strong style="color:green;">'. $left .' additional banner(s)</strong>. A total of 9 is allowed.</em></p>');
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function multibanner_preprocess_block(&$variables) {
+  if ($variables['elements']['#plugin_id'] === 'views_block:multibanner-block_default') {
+    $variables['#attached']['library'][] = 'multibanner/multibanner_type_slider';
+  }
+  if ($variables['elements']['#plugin_id'] === 'views_block:multibanner-block_flex') {
+    $variables['#attached']['library'][] = 'multibanner/multibanner_type_flex';
+  }
+}

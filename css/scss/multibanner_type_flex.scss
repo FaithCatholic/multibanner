@@ -1,0 +1,200 @@
+// Multibanner flex banners
+
+@import "breakpoint";
+@import "compass/typography/text/ellipsis";
+@import "compass/css3/images";
+@import "compass/css3/opacity";
+@import "variables";
+
+.multibanners-type-flex {
+
+  li {
+    @include background-image(linear-gradient(to bottom right, #1e5799, #dc30ff, #ff9400));
+    float: left;
+
+    .banner-content-inner {
+      padding: 2em;
+    }
+
+  }
+
+  img {
+    // repeating .1's responsive subpixel layout hack
+    min-width: 100.11111%;
+    max-width: 100.11111%;
+    @include opacity(4/5);
+  }
+
+  .field--name-name {
+    font-size: 2em;
+    @include ellipsis();
+  }
+
+  &.multibanners-count-1 {
+
+    li {
+      float: none;
+      width: 100%;
+    }
+
+  }
+
+  &.multibanners-count-2,
+  &.multibanners-count-4 {
+
+    li {
+      width: percentage(1/2);
+
+      @include breakpoint(max-width 1000px) {
+        width: percentage(1/2);
+      }
+
+      @include breakpoint(max-width 500px) {
+        width: 100%;
+      }
+
+    }
+
+  }
+
+  &.multibanners-count-3,
+  &.multibanners-count-6,
+  &.multibanners-count-9 {
+
+    li {
+      width: percentage(1/3);
+
+      @include breakpoint(max-width 1000px) {
+        width: percentage(1/2);
+      }
+
+      @include breakpoint(max-width 500px) {
+        width: 100%;
+      }
+
+    }
+
+  }
+
+  &.multibanners-count-5,
+  &.multibanners-count-8 {
+
+    li {
+      width: percentage(1/4);
+
+      @include breakpoint(max-width 1000px) {
+        width: percentage(1/2);
+      }
+
+      @include breakpoint(max-width 500px) {
+        width: 100%;
+      }
+
+    }
+
+  }
+
+  &.multibanners-count-3 {
+
+    li {
+
+      &:first-child {
+
+        @include breakpoint(min-width 1000px) {
+          width: percentage(2/3);
+        }
+
+        @include breakpoint(max-width 1000px) {
+          width: 100%;
+        }
+      }
+
+    }
+
+  }
+
+  &.multibanners-count-5 {
+
+    li {
+
+      &:first-child {
+
+        @include breakpoint(min-width 1000px) {
+          width: percentage(1/2);
+        }
+
+        @include breakpoint(max-width 1000px) {
+          width: 100%;
+        }
+      }
+
+    }
+
+  }
+
+  &.multibanners-count-7 {
+
+    li {
+
+      width: percentage(1/5);
+
+      @include breakpoint(max-width 1000px) {
+        width: percentage(1/2);
+      }
+
+      @include breakpoint(max-width 500px) {
+        width: 100%;
+      }
+
+      &:first-child {
+        @include breakpoint(min-width 1000px) {
+          width: percentage(1/2.5);
+        }
+
+        @include breakpoint(max-width 1000px) {
+          width: 100%;
+        }
+
+      }
+
+    }
+
+  }
+
+
+  &.multibanners-count-3,
+  &.multibanners-count-5,
+  &.multibanners-count-7 {
+
+    li:first-child {
+
+      @include breakpoint(min-width 500px) {
+        .banner-content .banner-content-inner .field--name-name {
+          font-size: 2.75em;
+        }
+
+      }
+
+    }
+
+  }
+
+  &.multibanners-count-9 {
+
+    li:first-child {
+
+      @include breakpoint(max-width 1000px) {
+        width: 100%;
+      }
+
+      @include breakpoint(500px and 1000px) {
+        .banner-content .banner-content-inner .field--name-name {
+          font-size: 2em;
+        }
+      }
+
+    }
+
+  }
+
+}

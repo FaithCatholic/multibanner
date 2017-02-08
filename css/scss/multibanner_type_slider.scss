@@ -1,0 +1,73 @@
+// Multibanner sliding banners
+
+@import "breakpoint";
+@import "variables";
+
+.unslider {
+  position: relative;
+
+  .unslider-arrow {
+    background: $darkest;
+    bottom: percentage(1/2);
+    color: $lightest;
+    font-size: 0.75em;
+    letter-spacing: 0.15em;
+    margin-bottom: -2.25em;
+    padding: 1.5em;
+    text-transform: uppercase;
+    z-index: 20;
+
+    &.prev {
+      left: 0;
+    }
+
+    &.next {
+      right: 0;
+    }
+
+    &:hover {
+      background: $lightest;
+      color: $darkest;
+    }
+  }
+
+  .unslider-nav {
+    bottom: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+
+    ol {
+      background: $lightest;
+      display: inline-block;
+      padding: 1em;
+      position: relative;
+      z-index: 20;
+
+      li {
+        border-color: $darkest;
+
+        &.unslider-active {
+          background: $darkest;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+.multibanners-type-slider {
+
+  .field--name-name {
+    font-size: 2.75em;
+
+    @include breakpoint(max-width 1000px) {
+      font-size: 1.65em;
+    }
+
+  }
+
+}

@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.multibanner.image.field_multibanner_image
+    - multibanner.bundle.image
+  module:
+    - image
+id: multibanner.image.default
+targetEntityType: multibanner
+bundle: image
+mode: default
+content:
+  field_multibanner_image:
+    weight: 1
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  name:
+    label: hidden
+    type: string
+    weight: 0
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  created: true
+  thumbnail: true
+  uid: true

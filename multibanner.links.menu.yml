@@ -1,0 +1,17 @@
+entity.multibanner_bundle.collection:
+  title: 'Multibanners'
+  parent: system.admin_structure
+  description: 'Manage multibanner bundles.'
+  route_name: entity.multibanner_bundle.collection
+
+entity.multibanner.collection:
+  title: 'Multibanners'
+  parent: system.admin_content
+  description: 'Manage multibanner content.'
+  route_name: view.multibanner.multibanner_page_list
+
+entity.multibanner.add:
+  title: 'Add multibanner'
+  parent: entity.multibanner.collection
+  description: 'Multibanner.'
+  route_name: entity.multibanner.add_page

@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.multibanner.video.field_multibanner_video
+    - multibanner.bundle.video
+  module:
+    - video_embed_field
+id: multibanner.video.default
+targetEntityType: multibanner
+bundle: video
+mode: default
+content:
+  field_multibanner_video:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: video_embed_field_textfield
+  name:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  uid: true
