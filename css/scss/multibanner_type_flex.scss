@@ -9,20 +9,12 @@
 .view-multibanner.view-display-id-block_flex {
 
   li {
-    @include background-image(linear-gradient(to bottom right, #1e5799, #dc30ff, #ff9400));
     float: left;
 
     .banner-content-inner {
       padding: 2em;
     }
 
-  }
-
-  img {
-    // repeating .1's responsive subpixel layout hack
-    min-width: 100.11111%;
-    max-width: 100.11111%;
-    @include opacity(4/5);
   }
 
   .field--name-name {
