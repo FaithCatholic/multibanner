@@ -55,14 +55,14 @@ display:
         options:
           offset: 0
       style:
-        type: html_list
+        type: multibanner
         options:
           grouping: {  }
           row_class: ''
           default_row_class: false
-          type: ul
-          wrapper_class: ''
+          uses_fields: false
           class: ''
+          wrapper_class: ''
       row:
         type: 'entity:multibanner'
         options:
@@ -294,12 +294,11 @@ display:
         items_per_page: false
       block_hide_empty: true
       style:
-        type: html_list
+        type: multibanner
         options:
-          grouping: {  }
           row_class: ''
           default_row_class: false
-          type: ul
+          uses_fields: false
           wrapper_class: ''
           class: ''
       defaults:
