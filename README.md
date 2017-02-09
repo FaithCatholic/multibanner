@@ -21,3 +21,5 @@
   a) field_multibanner and field_multibanner_layout (if present) are completely hidden
 7. Set multibanner blocks to desired region(s)
   a) Visiblity settings are optional
+
+Note: Focual point module is not installed. To use it, require and enable focal point. Then create and image style using focal point, and then under "Admin > Structure > Multibanners > my_type > Manage Display" set the appropriate image field to use the focal point image style image formatter.
