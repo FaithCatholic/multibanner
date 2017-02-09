@@ -40,19 +40,24 @@ function multibanner_theme() {
       'file' => 'multibanner.theme.inc',
       'template' => 'multibanner',
     ],
+    'views_view_multibanner' => [
+      'file' => 'multibanner.theme.inc',
+      'render element' => 'elements',
+      'template' => 'views_view_multibanner',
+    ],
   ];
 }
 
-function multibanner_preprocess_views_view(&$variables) {
-  $view = $variables['view'];
-  if ($view->storage->id() === 'multibanner') {
-    template_preprocess_views_view($variables);
-    $banner_count = count($variables['view']->result);
-    $variables['banner_count'] = $banner_count;
-    $variables['attributes']['class'][] = 'multibanner';
-    $variables['attributes']['class'][] = 'multibanner-count-'. $banner_count;
-  }
-}
+// function multibanner_preprocess_views_view(&$variables) {
+//   $view = $variables['view'];
+//   if ($view->storage->id() === 'multibanner') {
+//     template_preprocess_views_view($variables);
+//     $banner_count = count($variables['view']->result);
+//     $variables['banner_count'] = $banner_count;
+//     $variables['attributes']['class'][] = 'multibanner';
+//     $variables['attributes']['class'][] = 'multibanner-count-'. $banner_count;
+//   }
+// }
 
 /**
  * Implements hook_theme_suggestions_HOOK().
