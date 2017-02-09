@@ -93,22 +93,8 @@ function template_preprocess_views_view_multibanner(&$variables) {
 
   // Prepare template variables/classes.
   $banner_count = count($variables['view']->result);
-  // $banner_type = 'slider';
-  // if ($node = \Drupal::routeMatch()->getParameter('node')) {
-  //   if ($node->hasField('field_banner_type')) {
-  //     if (count($node->get('field_banner_type')->getValue())) {
-  //       $banner_type = $node->get('field_banner_type')->getValue()[0]['value'];
-  //     }
-  //   }
-  // }
-
-  // Assign template variables.
-  // $variables['banner_type'] = $banner_type;
   $variables['banner_count'] = $banner_count;
-
-  // Assign template classes.
   $variables['attributes']['class'][] = 'multibanner';
-  // $variables['attributes']['class'][] = 'multibanners-type-'. $banner_type;
   $variables['attributes']['class'][] = 'multibanner-count-'. $banner_count;
 
   // Finish rendering.

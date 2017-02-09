@@ -1,0 +1,7 @@
+name: Multibanner Default
+description: 'Multibanner default entities and blocks.'
+type: module
+package: Multibanner
+core: 8.x
+dependencies:
+  - drupal:multibanner

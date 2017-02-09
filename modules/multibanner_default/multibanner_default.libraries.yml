@@ -1,0 +1,23 @@
+multibanner_type_slider:
+  version: VERSION
+  js:
+    /libraries/unslider/dist/js/unslider-min.js: {}
+    js/multibanner_type_slider.js: {}
+  css:
+    theme:
+      /libraries/unslider/dist/css/unslider.css: {}
+      /libraries/unslider/dist/css/unslider-dots.css: {}
+      css/multibanner_type_all.css: {}
+      css/multibanner_type_slider.css: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery
+    - core/jquery.once
+
+multibanner_type_flex:
+  version: VERSION
+  css:
+    theme:
+      css/multibanner_type_all.css: {}
+      css/multibanner_type_flex.css: {}

@@ -1,5 +1,5 @@
 name: Multibanner
-description: 'Multibanner API.'
+description: 'Multibanner entities and configuration.'
 type: module
 package: Multibanner
 core: 8.x
