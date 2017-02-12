@@ -10,8 +10,8 @@
   c) "Create referenced entities if they don't already exist" is unchecked
   d) Check appropriate multibanner entity types to include
   e) "Sort by" is empty
-6. Optionally: add field_multibanner_layout to desired node type
-  a) "Required field" is checked
+6. Add field_multibanner_layout to desired node type
+  a) "Required field" is checked (although it CAN be unchecked to allow users to disable node banners where banners are indeed referenced!)
   b) "Default value" is set to "Default"
 7. Set node form display so that:
   a) field_multibanners is a "Inline entity form - Complex" that:
