@@ -301,8 +301,8 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
       ]);
 
     $fields['name'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Multibanner name'))
-      ->setDescription(t('The name of this multibanner.'))
+      ->setLabel(t('Title'))
+      ->setDescription(t('The primary title or heading text.'))
       ->setRequired(TRUE)
       ->setTranslatable(TRUE)
       ->setRevisionable(TRUE)
