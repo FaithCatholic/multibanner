@@ -91,7 +91,22 @@ function template_preprocess_views_view_multibanner(&$variables) {
     $variables['attributes']['class'] = array();
   }
 
-  // Prepare template variables/classes.
+  $variables['layout'] = 'default';
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    if ($node->hasField('field_multibanner_layout')) {
+      $variables['layout'] = $node->get('field_multibanner_layout')->getValue()[0]['value'];
+    }
+  }
+
+  // Banner layout vars.
+  $variables['layout'] = 'default';
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    if ($node->hasField('field_multibanner_layout')) {
+      $variables['layout'] = $node->get('field_multibanner_layout')->getValue()[0]['value'];
+    }
+  }
+
+  // Banner count class vars.
   $banner_count = count($variables['view']->result);
   $variables['banner_count'] = $banner_count;
   $variables['attributes']['class'][] = 'multibanner';
