@@ -16,6 +16,9 @@ settings:
     -
       value: flex
       label: Flex
+    -
+      value: front
+      label: Front
   allowed_values_function: ''
 module: options
 locked: false

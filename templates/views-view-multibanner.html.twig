@@ -4,11 +4,27 @@
   {% if title %}
     <h3>{{ title }}</h3>
   {% endif %}
-  <ul{{ list.attributes }}>
-    {% for row in rows %}
-      <li{{ row.attributes }}>{{ row.content }}</li>
-    {% endfor %}
-  </ul>
+  {% if layout == 'front' %}
+    <div{{ list.attributes }}>
+      {% for row in rows %}
+        {% if loop.index0 % 3 == 0 %}
+          {% if loop.first != true %}
+            </div>
+          {% endif %}
+          {% if loop.last != true %}
+            <div class="column">
+          {% endif %}
+        {% endif %}
+        <div class="banner-count-{{ loop.index }}">{{ row.content }}</div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <ul{{ list.attributes }}>
+      {% for row in rows %}
+        <li{{ row.attributes }}>{{ row.content }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 {% if attributes -%}
   </div>
 {% endif %}

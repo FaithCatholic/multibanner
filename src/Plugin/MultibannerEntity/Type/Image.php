@@ -7,8 +7,8 @@ use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Image\ImageFactory;
-use Drupal\multibanner\MultibannerInterface;
-use Drupal\multibanner\MultibannerTypeBase;
+use Drupal\multibanner\multibannerInterface;
+use Drupal\multibanner\multibannerTypeBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Form\FormStateInterface;
 

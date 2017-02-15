@@ -21,3 +21,10 @@ multibanner_type_flex:
     theme:
       css/multibanner_type_all.css: {}
       css/multibanner_type_flex.css: {}
+
+multibanner_type_front:
+  version: VERSION
+  css:
+    theme:
+      css/multibanner_type_all.css: {}
+      css/multibanner_type_front.css: {}
