@@ -10,4 +10,7 @@ function multibanner_default_preprocess_block(&$variables) {
   if ($variables['elements']['#plugin_id'] === 'views_block:multibanner_default-block_flex') {
     $variables['#attached']['library'][] = 'multibanner_default/multibanner_type_flex';
   }
+  if ($variables['elements']['#plugin_id'] === 'views_block:multibanner_default-block_front') {
+    $variables['#attached']['library'][] = 'multibanner_default/multibanner_type_front';
+  }
 }

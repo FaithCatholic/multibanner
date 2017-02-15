@@ -117,18 +117,3 @@ function multibanner_field_widget_form_alter(&$element, \Drupal\Core\Form\FormSt
     }
   }
 }
-
-/**
- * Implements hook_preprocess_block().
- */
-function multibanner_preprocess_block(&$variables) {
-  if ($variables['elements']['#plugin_id'] === 'views_block:multibanner-block_default') {
-    $variables['#attached']['library'][] = 'multibanner/multibanner_type_slider';
-  }
-  if ($variables['elements']['#plugin_id'] === 'views_block:multibanner-block_flex') {
-    $variables['#attached']['library'][] = 'multibanner/multibanner_type_flex';
-  }
-  if ($variables['elements']['#plugin_id'] === 'views_block:multibanner-block_front') {
-    $variables['#attached']['library'][] = 'multibanner/multibanner_type_front';
-  }
-}

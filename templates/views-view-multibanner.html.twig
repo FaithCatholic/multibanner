@@ -5,18 +5,17 @@
     <h3>{{ title }}</h3>
   {% endif %}
   {% if layout == 'front' %}
-    <div{{ list.attributes }}>
+    <div class="multibanner-items">
+      <div class="multibanner-column">
       {% for row in rows %}
         {% if loop.index0 % 3 == 0 %}
           {% if loop.first != true %}
-            </div>
-          {% endif %}
-          {% if loop.last != true %}
-            <div class="column">
+            </div><div class="multibanner-column">
           {% endif %}
         {% endif %}
-        <div class="banner-count-{{ loop.index }}">{{ row.content }}</div>
+        <div class="multibanner-item multibanner-count-{{ loop.index }}">{{ row.content }}</div>
       {% endfor %}
+      </div>
     </div>
   {% else %}
     <ul{{ list.attributes }}>
