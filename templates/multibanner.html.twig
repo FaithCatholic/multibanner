@@ -14,7 +14,13 @@
 #}
 <div{{ attributes.addClass('banner') }}>
   {% if content.field_multibanner_image %}
+    {% if layout == 'front' and content.field_multibanner_link|render %}
+      <a href="{{ content.field_multibanner_link[0]['#plain_text'] }}">
+    {% endif %}
     {{ content.field_multibanner_image }}
+    {% if layout == 'front' and content.field_multibanner_link|render %}
+      </a>
+    {% endif %}
   {% endif %}
   {% if content.field_multibanner_video %}
     {{ content.field_multibanner_video }}

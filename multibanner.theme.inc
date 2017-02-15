@@ -62,6 +62,14 @@ function template_preprocess_multibanner(&$variables) {
   if ($variables['elements']['#view_mode']) {
     $variables['attributes']['class'][] = Html::getClass('view-mode-' . $variables['elements']['#view_mode']);
   }
+
+  // Banner layout vars.
+  $variables['layout'] = 'default';
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    if ($node->hasField('field_multibanner_layout')) {
+      $variables['layout'] = $node->get('field_multibanner_layout')->getValue()[0]['value'];
+    }
+  }
 }
 
 /**
