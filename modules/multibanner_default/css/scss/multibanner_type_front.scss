@@ -6,42 +6,50 @@
 @import "compass/css3/opacity";
 @import "variables";
 
-.view-multibanner-default.view-display-id-block_front {
-  margin: -5px;
-  background: none;
+@include breakpoint(min-width 1000px) {
 
-  .multibanner-column {
-    float: right;
-    width: percentage(2/5);
+  .view-multibanner-default.view-display-id-block_front {
+    margin: -5px;
+    background: none;
 
-    .multibanner-item {
-      box-sizing: border-box;
+    .multibanner-column {
+      float: right;
+      width: percentage(2/5);
+
+      .multibanner-item {
+        box-sizing: border-box;
+        float: left;
+        padding: 5px;
+        width: percentage(1/2);
+      }
+
+      .multibanner-count-4 {
+        float: right;
+        width: 100%;
+      }
+
+    }
+
+    .multibanner-column:first-child {
       float: left;
-      padding: 5px;
-      width: percentage(1/2);
-    }
+      width: percentage(3/5);
 
-    .multibanner-count-4 {
-      float: right;
-      width: 100%;
-    }
+      .multibanner-item {
+        width: percentage(1/3);
+      }
 
-  }
+      .multibanner-count-1 {
+        width: percentage(2/3);
+        float: right;
+      }
 
-  .multibanner-column:first-child {
-    float: left;
-    width: percentage(3/5);
-
-    .multibanner-item {
-      width: percentage(1/3);
-    }
-
-    .multibanner-count-1 {
-      width: percentage(2/3);
-      float: right;
     }
 
   }
+
+}
+
+.view-multibanner-default.view-display-id-block_front {
 
   .multibanner-item {
 

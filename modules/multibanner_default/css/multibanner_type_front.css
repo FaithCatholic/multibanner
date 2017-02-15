@@ -1,45 +1,47 @@
-/* line 9, scss/multibanner_type_front.scss */
-.view-multibanner-default.view-display-id-block_front {
-  margin: -5px;
-  background: none;
+@media (min-width: 1000px) {
+  /* line 11, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front {
+    margin: -5px;
+    background: none;
+  }
+  /* line 15, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-column {
+    float: right;
+    width: 40%;
+  }
+  /* line 19, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-column .multibanner-item {
+    box-sizing: border-box;
+    float: left;
+    padding: 5px;
+    width: 50%;
+  }
+  /* line 26, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-column .multibanner-count-4 {
+    float: right;
+    width: 100%;
+  }
+  /* line 33, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-column:first-child {
+    float: left;
+    width: 60%;
+  }
+  /* line 37, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-column:first-child .multibanner-item {
+    width: 33.33333%;
+  }
+  /* line 41, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-column:first-child .multibanner-count-1 {
+    width: 66.66667%;
+    float: right;
+  }
 }
-/* line 13, scss/multibanner_type_front.scss */
-.view-multibanner-default.view-display-id-block_front .multibanner-column {
-  float: right;
-  width: 40%;
-}
-/* line 17, scss/multibanner_type_front.scss */
-.view-multibanner-default.view-display-id-block_front .multibanner-column .multibanner-item {
-  box-sizing: border-box;
-  float: left;
-  padding: 5px;
-  width: 50%;
-}
-/* line 24, scss/multibanner_type_front.scss */
-.view-multibanner-default.view-display-id-block_front .multibanner-column .multibanner-count-4 {
-  float: right;
-  width: 100%;
-}
-/* line 31, scss/multibanner_type_front.scss */
-.view-multibanner-default.view-display-id-block_front .multibanner-column:first-child {
-  float: left;
-  width: 60%;
-}
-/* line 35, scss/multibanner_type_front.scss */
-.view-multibanner-default.view-display-id-block_front .multibanner-column:first-child .multibanner-item {
-  width: 33.33333%;
-}
-/* line 39, scss/multibanner_type_front.scss */
-.view-multibanner-default.view-display-id-block_front .multibanner-column:first-child .multibanner-count-1 {
-  width: 66.66667%;
-  float: right;
-}
-/* line 48, scss/multibanner_type_front.scss */
+/* line 56, scss/multibanner_type_front.scss */
 .view-multibanner-default.view-display-id-block_front .multibanner-item .banner-content-inner {
   background: none;
   padding: 0;
 }
-/* line 55, scss/multibanner_type_front.scss */
+/* line 63, scss/multibanner_type_front.scss */
 .view-multibanner-default.view-display-id-block_front .field--name-name {
   display: none;
 }
