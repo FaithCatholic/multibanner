@@ -22,16 +22,16 @@
     width: 100%;
   }
   /* line 33, scss/multibanner_type_front.scss */
-  .view-multibanner-default.view-display-id-block_front .multibanner-column:first-child {
+  .view-multibanner-default.view-display-id-block_front .multibanner-column-1 {
     float: left;
     width: 60%;
   }
   /* line 37, scss/multibanner_type_front.scss */
-  .view-multibanner-default.view-display-id-block_front .multibanner-column:first-child .multibanner-item {
+  .view-multibanner-default.view-display-id-block_front .multibanner-column-1 .multibanner-item {
     width: 33.33333%;
   }
   /* line 41, scss/multibanner_type_front.scss */
-  .view-multibanner-default.view-display-id-block_front .multibanner-column:first-child .multibanner-count-1 {
+  .view-multibanner-default.view-display-id-block_front .multibanner-column-1 .multibanner-count-1 {
     width: 66.66667%;
     float: right;
   }
