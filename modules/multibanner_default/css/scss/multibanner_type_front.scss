@@ -68,9 +68,7 @@
       }
     }
 
-    .multibanner-total-4,
-    .multibanner-total-5,
-    .multibanner-total-6 {
+    .multibanner-total-4 {
 
       .multibanner-column-1 {
         float: left;
@@ -86,10 +84,60 @@
         width: percentage(2/5);
       }
 
-      // EXCEPTIONAL HARD-CODED LAYOUT THAT
-      // ALLOWS A WIDER BANNER
       .multibanner-count-4 {
-        width: 100%;
+        width: 100% !important;
+      }
+
+    }
+
+    .multibanner-total-5 {
+
+      .multibanner-column-1 {
+        float: left;
+        width: percentage(3/4);
+
+        .multibanner-item {
+          width: percentage(1/3);
+        }
+      }
+
+      .multibanner-column-2 {
+        float: right;
+        width: percentage(1/4);
+
+        .multibanner-item {
+          width: 100% !important;
+        }
+      }
+
+      .multibanner-count-4 {
+        width: percentage(2/3) !important;
+      }
+
+    }
+
+    .multibanner-total-6 {
+
+      .multibanner-column-1 {
+        float: left;
+        width: percentage(1/2);
+
+        .multibanner-item {
+          width: percentage(1/3);
+        }
+      }
+
+      .multibanner-column-2 {
+        float: right;
+        width: percentage(1/2);
+
+        .multibanner-item {
+          width: percentage(1/3);
+        }
+      }
+
+      .multibanner-count-4 {
+        width: percentage(2/3) !important;
       }
 
     }

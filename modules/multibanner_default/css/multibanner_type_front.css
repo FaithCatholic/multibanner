@@ -46,30 +46,82 @@
   .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-1 .multibanner-item {
     width: 33.33333%;
   }
-  /* line 75, scss/multibanner_type_front.scss */
-  .view-multibanner-default.view-display-id-block_front .multibanner-total-4 .multibanner-column-1,
-  .view-multibanner-default.view-display-id-block_front .multibanner-total-5 .multibanner-column-1,
-  .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-1 {
+  /* line 73, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-total-4 .multibanner-column-1 {
     float: left;
     width: 60%;
   }
-  /* line 79, scss/multibanner_type_front.scss */
-  .view-multibanner-default.view-display-id-block_front .multibanner-total-4 .multibanner-column-1 .multibanner-item,
-  .view-multibanner-default.view-display-id-block_front .multibanner-total-5 .multibanner-column-1 .multibanner-item,
-  .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-1 .multibanner-item {
+  /* line 77, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-total-4 .multibanner-column-1 .multibanner-item {
     width: 33.33333%;
   }
-  /* line 84, scss/multibanner_type_front.scss */
-  .view-multibanner-default.view-display-id-block_front .multibanner-total-4 .multibanner-column-2,
-  .view-multibanner-default.view-display-id-block_front .multibanner-total-5 .multibanner-column-2,
-  .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-2 {
+  /* line 82, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-total-4 .multibanner-column-2 {
     float: right;
     width: 40%;
   }
-  /* line 91, scss/multibanner_type_front.scss */
-  .view-multibanner-default.view-display-id-block_front .multibanner-total-4 .multibanner-count-4,
-  .view-multibanner-default.view-display-id-block_front .multibanner-total-5 .multibanner-count-4,
+  /* line 87, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-total-4 .multibanner-count-4 {
+    width: 100% !important;
+  }
+  /* line 95, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-total-5 .multibanner-column-1 {
+    float: left;
+    width: 75%;
+  }
+  /* line 99, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-total-5 .multibanner-column-1 .multibanner-item {
+    width: 33.33333%;
+  }
+  /* line 104, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-total-5 .multibanner-column-2 {
+    float: right;
+    width: 25%;
+  }
+  /* line 108, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-total-5 .multibanner-column-2 .multibanner-item {
+    width: 100% !important;
+  }
+  /* line 113, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-total-5 .multibanner-count-4 {
+    width: 66.66667% !important;
+  }
+  /* line 121, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-1 {
+    float: left;
+    width: 50%;
+  }
+  /* line 125, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-1 .multibanner-item {
+    width: 33.33333%;
+  }
+  /* line 130, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-2 {
+    float: right;
+    width: 50%;
+  }
+  /* line 134, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-2 .multibanner-item {
+    width: 33.33333%;
+  }
+  /* line 139, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-count-4 {
-    width: 100%;
+    width: 66.66667% !important;
+  }
+  /* line 147, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-1 {
+    width: 60% !important;
+  }
+  /* line 151, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-2 {
+    width: 40% !important;
+  }
+  /* line 154, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-2 .multibanner-item {
+    width: 50%;
+  }
+  /* line 159, scss/multibanner_type_front.scss */
+  .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-2 .multibanner-count-4 {
+    width: 100% !important;
   }
 }
