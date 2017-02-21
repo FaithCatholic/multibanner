@@ -108,20 +108,4 @@
   .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-count-4 {
     width: 66.66667% !important;
   }
-  /* line 147, scss/multibanner_type_front.scss */
-  .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-1 {
-    width: 60% !important;
-  }
-  /* line 151, scss/multibanner_type_front.scss */
-  .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-2 {
-    width: 40% !important;
-  }
-  /* line 154, scss/multibanner_type_front.scss */
-  .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-2 .multibanner-item {
-    width: 50%;
-  }
-  /* line 159, scss/multibanner_type_front.scss */
-  .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-2 .multibanner-count-4 {
-    width: 100% !important;
-  }
 }
