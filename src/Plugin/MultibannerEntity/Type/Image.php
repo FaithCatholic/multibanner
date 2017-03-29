@@ -15,7 +15,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Provides multibanner type plugin for Image.
  *
- * @multibannerType(
+ * @MultibannerType(
  *   id = "image",
  *   label = @Translation("Image multibanner"),
  *   description = @Translation("Provides business logic and metadata for local images.")
