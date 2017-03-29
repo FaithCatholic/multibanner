@@ -111,7 +111,7 @@ function template_preprocess_views_view_multibanner(&$variables) {
   $banner_count = count($variables['view']->result);
   $variables['banner_count'] = $banner_count;
   $variables['attributes']['class'][] = 'multibanner';
-  $variables['attributes']['class'][] = 'multibanner-count-'. $banner_count;
+  $variables['attributes']['class'][] = 'multibanner-total-'. $banner_count;
 
   // Finish rendering.
   template_preprocess_views_view_unformatted($variables);

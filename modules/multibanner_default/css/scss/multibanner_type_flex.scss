@@ -22,7 +22,7 @@
     @include ellipsis();
   }
 
-  .multibanner-count-1 {
+  .multibanner-total-1 {
 
     li {
       float: none;
@@ -31,8 +31,8 @@
 
   }
 
-  .multibanner-count-2,
-  .multibanner-count-4 {
+  .multibanner-total-2,
+  .multibanner-total-4 {
 
     li {
       width: percentage(1/2);
@@ -49,9 +49,9 @@
 
   }
 
-  .multibanner-count-3,
-  .multibanner-count-6,
-  .multibanner-count-9 {
+  .multibanner-total-3,
+  .multibanner-total-6,
+  .multibanner-total-9 {
 
     li {
       width: percentage(1/3);
@@ -68,8 +68,8 @@
 
   }
 
-  .multibanner-count-5,
-  .multibanner-count-8 {
+  .multibanner-total-5,
+  .multibanner-total-8 {
 
     li {
       width: percentage(1/4);
@@ -86,7 +86,7 @@
 
   }
 
-  .multibanner-count-3 {
+  .multibanner-total-3 {
 
     li {
 
@@ -105,7 +105,7 @@
 
   }
 
-  .multibanner-count-5 {
+  .multibanner-total-5 {
 
     li {
 
@@ -124,7 +124,7 @@
 
   }
 
-  .multibanner-count-7 {
+  .multibanner-total-7 {
 
     li {
 
@@ -154,9 +154,9 @@
   }
 
 
-  .multibanner-count-3,
-  .multibanner-count-5,
-  .multibanner-count-7 {
+  .multibanner-total-3,
+  .multibanner-total-5,
+  .multibanner-total-7 {
 
     li:first-child {
 
@@ -171,7 +171,7 @@
 
   }
 
-  .multibanner-count-9 {
+  .multibanner-total-9 {
 
     li:first-child {
 

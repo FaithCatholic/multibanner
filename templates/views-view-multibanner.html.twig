@@ -6,11 +6,13 @@
   {% endif %}
   {% if layout == 'front' %}
     <div class="multibanner-items">
-      <div class="multibanner-column">
+      {% set count = 1 %}
+      <div class="multibanner-column multibanner-column-{{ count }}">
       {% for row in rows %}
         {% if loop.index0 % 3 == 0 %}
           {% if loop.first != true %}
-            </div><div class="multibanner-column">
+            {% set count = count + 1 %}
+            </div><div class="multibanner-column multibanner-column-{{ count }}">
           {% endif %}
         {% endif %}
         <div class="multibanner-item multibanner-count-{{ loop.index }}">{{ row.content }}</div>
