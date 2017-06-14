@@ -1,3 +1,9 @@
 { 
-"name": "faithcatholic/multibanner"
+"name": "faithcatholic/multibanner",
+ "type": "drupal-module",
+ "description": "Flexible, responsive banner.",
+ "keywords": ["Drupal"],
+ "license": "GPL-2.0+",
+ "minimum-stability": "dev",
+  "require": { }
 }
