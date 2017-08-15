@@ -55,5 +55,10 @@
 .view-multibanner-default .field--name-name {
   font-weight: bold;
   letter-spacing: 0.05em;
+  line-height: 1;
   text-transform: uppercase;
+}
+/* line 61, scss/multibanner_type_all.scss */
+.view-multibanner-default .field--name-field-multibanner-teaser {
+  line-height: 1.5;
 }

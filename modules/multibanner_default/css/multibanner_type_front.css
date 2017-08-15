@@ -1,43 +1,48 @@
-/* line 13, scss/multibanner_type_front.scss */
-.view-multibanner-default.view-display-id-block_front .multibanner-item .banner-content-inner {
-  background: none;
-  padding: 0;
+/* line 11, scss/multibanner_type_front.scss */
+.view-multibanner-default.view-display-id-block_front .multibanner-item {
+  padding: 5px;
+  position: relative;
 }
-/* line 19, scss/multibanner_type_front.scss */
+/* line 15, scss/multibanner_type_front.scss */
+.view-multibanner-default.view-display-id-block_front .multibanner-item .banner-content-inner {
+  margin: 5px;
+  padding: 2em;
+}
+/* line 21, scss/multibanner_type_front.scss */
 .view-multibanner-default.view-display-id-block_front .field--name-name {
-  display: none;
+  font-size: 1.5em;
 }
 
 @media (min-width: 1000px) {
-  /* line 27, scss/multibanner_type_front.scss */
+  /* line 29, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front {
     margin: -5px;
     background: none;
   }
-  /* line 31, scss/multibanner_type_front.scss */
+  /* line 33, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-item {
     box-sizing: border-box;
     float: left;
     padding: 5px;
     width: 50%;
   }
-  /* line 38, scss/multibanner_type_front.scss */
+  /* line 40, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-count-1 {
     width: 66.66667% !important;
     float: right;
   }
-  /* line 44, scss/multibanner_type_front.scss */
+  /* line 46, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-total-1 .multibanner-count-1 {
     width: 100% !important;
     float: none;
   }
-  /* line 51, scss/multibanner_type_front.scss */
+  /* line 53, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-total-2 .multibanner-count-1,
   .view-multibanner-default.view-display-id-block_front .multibanner-total-2 .multibanner-count-2 {
     width: 50% !important;
     float: left;
   }
-  /* line 65, scss/multibanner_type_front.scss */
+  /* line 67, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-total-1 .multibanner-column-1 .multibanner-item,
   .view-multibanner-default.view-display-id-block_front .multibanner-total-2 .multibanner-column-1 .multibanner-item,
   .view-multibanner-default.view-display-id-block_front .multibanner-total-3 .multibanner-column-1 .multibanner-item,
@@ -46,66 +51,72 @@
   .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-1 .multibanner-item {
     width: 33.33333%;
   }
-  /* line 73, scss/multibanner_type_front.scss */
+  /* line 75, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-total-4 .multibanner-column-1 {
     float: left;
     width: 60%;
   }
-  /* line 77, scss/multibanner_type_front.scss */
+  /* line 79, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-total-4 .multibanner-column-1 .multibanner-item {
     width: 33.33333%;
   }
-  /* line 82, scss/multibanner_type_front.scss */
+  /* line 84, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-total-4 .multibanner-column-2 {
     float: right;
     width: 40%;
   }
-  /* line 87, scss/multibanner_type_front.scss */
+  /* line 89, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-total-4 .multibanner-count-4 {
     width: 100% !important;
   }
-  /* line 95, scss/multibanner_type_front.scss */
+  /* line 97, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-total-5 .multibanner-column-1 {
     float: left;
     width: 75%;
   }
-  /* line 99, scss/multibanner_type_front.scss */
+  /* line 101, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-total-5 .multibanner-column-1 .multibanner-item {
     width: 33.33333%;
   }
-  /* line 104, scss/multibanner_type_front.scss */
+  /* line 106, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-total-5 .multibanner-column-2 {
     float: right;
     width: 25%;
   }
-  /* line 108, scss/multibanner_type_front.scss */
+  /* line 110, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-total-5 .multibanner-column-2 .multibanner-item {
     width: 100% !important;
   }
-  /* line 113, scss/multibanner_type_front.scss */
+  /* line 115, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-total-5 .multibanner-count-4 {
     width: 66.66667% !important;
   }
-  /* line 121, scss/multibanner_type_front.scss */
+  /* line 123, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-1 {
     float: left;
     width: 50%;
   }
-  /* line 125, scss/multibanner_type_front.scss */
+  /* line 127, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-1 .multibanner-item {
     width: 33.33333%;
   }
-  /* line 130, scss/multibanner_type_front.scss */
+  /* line 132, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-2 {
     float: right;
     width: 50%;
   }
-  /* line 134, scss/multibanner_type_front.scss */
+  /* line 136, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-column-2 .multibanner-item {
     width: 33.33333%;
   }
-  /* line 139, scss/multibanner_type_front.scss */
+  /* line 141, scss/multibanner_type_front.scss */
   .view-multibanner-default.view-display-id-block_front .multibanner-total-6 .multibanner-count-4 {
     width: 66.66667% !important;
+  }
+}
+@media (min-width: 500px) {
+  /* line 153, scss/multibanner_type_front.scss */
+  .multibanner-count-1 .banner-content .banner-content-inner .field--name-name {
+    font-size: 2.75em;
   }
 }
