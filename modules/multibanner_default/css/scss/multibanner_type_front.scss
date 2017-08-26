@@ -9,15 +9,17 @@
 .view-multibanner-default.view-display-id-block_front {
 
   .multibanner-item {
+    padding: 5px;
+    position: relative;
 
     .banner-content-inner {
-      background: none;
-      padding: 0;
+      margin: 5px;
+      padding: 2em;
     }
   }
 
   .field--name-name {
-    display: none;
+    font-size: 1.5em;
   }
 
 }
