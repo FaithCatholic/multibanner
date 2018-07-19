@@ -19,6 +19,37 @@
       {% endfor %}
       </div>
     </div>
+  {% elseif layout == 'sync' %}
+    <div class="slider-pro sp-vertical">
+      <div class="sp-slides">
+        {% for row in rows %}
+          <div class="sp-slide">
+            {{ row.content }}
+          </div>
+        {% endfor %}
+      </div>
+      
+      <div class="sp-thumbnails">
+        {% for row in rows %}
+          <div class="sp-thumbnail">
+            <div class="sp-thumbnail-text">
+              <div class="sp-thumbnail-description">
+              {% if row.content['#multibanner'].field_multibanner_link.0.url.external %}
+                <a href="{{ row.content['#multibanner'].field_multibanner_link.uri }}" class="sp-selectable">{{ row.content['#multibanner'].name[0].value }}</a>
+              {% else %}
+              {% set node_id = row.content['#multibanner'].field_multibanner_link.0.url.routeParameters.node %}
+                {% if node_id %}
+                  <a href="{{ path('entity.node.canonical', {'node': node_id}) }}" class="sp-selectable">{{ row.content['#multibanner'].name[0].value }}</a>
+                {% else %}
+                  {{ row.content['#multibanner'].name[0].value }}
+                {% endif %}
+              {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
   {% else %}
     <ul{{ list.attributes }}>
       {% for row in rows %}
