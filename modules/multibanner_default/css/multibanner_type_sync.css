@@ -67,6 +67,7 @@
       max-height: 2.4em;
       padding-top: 0;
       padding-bottom: 0;
+      font-size: 13px;
       /* place for '...' */ }
       .sp-thumbnail-container .sp-thumbnail-description:before {
         /* points in the end */
@@ -90,6 +91,8 @@
     .sp-thumbnail-container .sp-thumbnail-text {
       min-height: 56px;
       word-break: break-all; }
+      .sp-thumbnail-container .sp-thumbnail-text a {
+        font-size: 13px !important; }
 
   .sp-bottom-thumbnails.sp-has-pointer .sp-thumbnail {
     position: relative; } }
