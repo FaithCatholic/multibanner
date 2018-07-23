@@ -25,7 +25,7 @@
   {% if content.field_multibanner_video %}
     {{ content.field_multibanner_video }}
   {% endif %}
-  {% if content.field_multibanner_video is not defined %}
+  {% if content.field_multibanner_video is not defined and layout != 'sync' %}
     <div class="banner-content">
       <div class="banner-content-inner">
       {% for key, value in content %}

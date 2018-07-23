@@ -28,3 +28,18 @@ multibanner_type_front:
     theme:
       css/multibanner_type_all.css: {}
       css/multibanner_type_front.css: {}
+      
+multibanner_type_sync:
+  version: VERSION
+  js:
+    /libraries/slider-pro/dist/js/jquery.sliderPro.min.js: {}
+    js/multibanner_type_sync.js: {}
+  css:
+    theme:
+      /libraries/slider-pro/dist/css/slider-pro.min.css: {}
+      css/multibanner_type_sync.css: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery
+    - core/jquery.once

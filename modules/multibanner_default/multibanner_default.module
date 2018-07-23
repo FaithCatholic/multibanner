@@ -13,4 +13,7 @@ function multibanner_default_preprocess_block(&$variables) {
   if ($variables['elements']['#plugin_id'] === 'views_block:multibanner_default-block_front') {
     $variables['#attached']['library'][] = 'multibanner_default/multibanner_type_front';
   }
+  if ($variables['elements']['#plugin_id'] === 'views_block:multibanner_default-block_sync') {
+    $variables['#attached']['library'][] = 'multibanner_default/multibanner_type_sync';
+  }
 }
