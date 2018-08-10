@@ -125,3 +125,52 @@
     }
   }
 }
+
+@media (max-width: 700px) {
+  .field--name-field-multibanner-image {
+    width: 100%;
+    
+    img {
+      object-fit: cover;
+      object-position: 50% 50%;
+      height: 40vh !important;
+      width: auto !important;
+    }
+    
+    &:after {
+      content: "";
+      display: block;
+      padding-bottom: 100%;
+    }
+  }
+  
+  .sp-mask {
+    width: 100%;
+    height: 40vh !important;
+    
+    &:after {
+      content: "";
+      display: block;
+      padding-bottom: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) and (min-width: 700px) {
+  .multibanner {
+    .slider-pro {
+      .sp-slides-container {
+        .sp-mask {
+          height: 42vh !important;
+        }
+        
+        .sp-slide {
+          img {
+            height: 42vh !important;
+            object-position: 50% 50%;
+          }
+        }
+      }
+    }
+  }
+}
