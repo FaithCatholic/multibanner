@@ -1,126 +1,165 @@
-.sp-thumbnail-image-container {
+/* line 3, scss/multibanner_type_sync.scss */
+.view-display-id-block_sync .sp-thumbnail-image-container {
   width: 100px;
   height: 80px;
   overflow: hidden;
-  float: left; }
-
-.sp-right-thumbnails.sp-has-pointer .sp-thumbnail {
-  width: 100%; }
-
-.sp-thumbnail-image {
-  height: 100%; }
-
-.sp-thumbnail-text {
+  float: left;
+}
+/* line 9, scss/multibanner_type_sync.scss */
+.view-display-id-block_sync .sp-right-thumbnails.sp-has-pointer .sp-thumbnail {
+  width: 100%;
+}
+/* line 13, scss/multibanner_type_sync.scss */
+.view-display-id-block_sync .sp-thumbnail-image {
+  height: 100%;
+}
+/* line 17, scss/multibanner_type_sync.scss */
+.view-display-id-block_sync .sp-thumbnail-text {
   float: right;
   padding: 8px;
   background-color: #F0F0F0;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  width: 100%; }
-
-.sp-thumbnail-title {
+  width: 100%;
+}
+/* line 26, scss/multibanner_type_sync.scss */
+.view-display-id-block_sync .sp-thumbnail-title {
   margin-bottom: 5px;
   text-transform: uppercase;
-  color: #333; }
-
-.sp-thumbnail-description {
+  color: #333;
+}
+/* line 32, scss/multibanner_type_sync.scss */
+.view-display-id-block_sync .sp-thumbnail-description {
   font-size: 17px;
   color: #333;
-  padding: 15px 0 15px 0; }
-
-.sp-thumbnail-description a {
+  padding: 15px 0 15px 0;
+}
+/* line 38, scss/multibanner_type_sync.scss */
+.view-display-id-block_sync .sp-thumbnail-description a {
   font-size: 17px !important;
   text-shadow: none !important;
-  color: #333 !important; }
-
-.sp-right-thumbnails.sp-has-pointer .sp-selected-thumbnail:before {
+  color: #333 !important;
+}
+/* line 44, scss/multibanner_type_sync.scss */
+.view-display-id-block_sync .sp-right-thumbnails.sp-has-pointer .sp-selected-thumbnail:before {
   border-color: #4B8088;
-  height: 93% !important; }
-
-.sp-right-thumbnails.sp-has-pointer .sp-selected-thumbnail:after {
-  border-right: 13px solid #4B8088; }
-
-.sp-left-thumbnails .sp-thumbnail-container, .sp-right-thumbnails .sp-thumbnail-container {
+  height: 93% !important;
+}
+/* line 49, scss/multibanner_type_sync.scss */
+.view-display-id-block_sync .sp-right-thumbnails.sp-has-pointer .sp-selected-thumbnail:after {
+  border-right: 13px solid #4B8088;
+}
+/* line 53, scss/multibanner_type_sync.scss */
+.view-display-id-block_sync .sp-left-thumbnails .sp-thumbnail-container, .view-display-id-block_sync .sp-right-thumbnails .sp-thumbnail-container {
   margin-bottom: 0 !important;
-  margin-top: 0 !important; }
-
-.sp-selected-thumbnail .sp-thumbnail-text {
-  background: #4B8088; }
-
-.sp-selected-thumbnail .sp-thumbnail-title,
-.sp-selected-thumbnail .sp-thumbnail-description,
-.sp-selected-thumbnail .sp-thumbnail-description a {
-  color: #ffffff !important; }
-
+  margin-top: 0 !important;
+}
+/* line 58, scss/multibanner_type_sync.scss */
+.view-display-id-block_sync .sp-selected-thumbnail .sp-thumbnail-text {
+  background: #4B8088;
+}
+/* line 62, scss/multibanner_type_sync.scss */
+.view-display-id-block_sync .sp-selected-thumbnail .sp-thumbnail-title,
+.view-display-id-block_sync .sp-selected-thumbnail .sp-thumbnail-description,
+.view-display-id-block_sync .sp-selected-thumbnail .sp-thumbnail-description a {
+  color: #ffffff !important;
+}
 @media (max-width: 800px) {
-  .sp-thumbnail-container {
+  /* line 69, scss/multibanner_type_sync.scss */
+  .view-display-id-block_sync .sp-thumbnail-container {
     overflow: visible;
-    min-height: 100px; }
-    .sp-thumbnail-container .sp-thumbnail-description {
-      /* hide text if it more than N lines  */
-      overflow: hidden;
-      /* for set '...' in absolute position */
-      position: relative;
-      /* use this value to count block height */
-      line-height: 1.2em;
-      /* max-height = line-height (1.2) * lines max number (3) */
-      max-height: 2.4em;
-      padding-top: 0;
-      padding-bottom: 0;
-      font-size: 13px;
-      /* place for '...' */ }
-      .sp-thumbnail-container .sp-thumbnail-description:before {
-        /* points in the end */
-        content: '...';
-        /* absolute position */
-        position: absolute;
-        /* set position to right bottom corner of block */
-        right: 0;
-        bottom: 0; }
-      .sp-thumbnail-container .sp-thumbnail-description:after {
-        /* points in the end */
-        content: '';
-        /* absolute position */
-        position: absolute;
-        /* set position to right bottom corner of text */
-        right: 0;
-        /* set width and height */
-        width: 1em;
-        height: 1em;
-        margin-top: 0.2em; }
-    .sp-thumbnail-container .sp-thumbnail-text {
-      min-height: 56px;
-      word-break: break-all; }
-      .sp-thumbnail-container .sp-thumbnail-text a {
-        font-size: 13px !important; }
-
-  .sp-bottom-thumbnails.sp-has-pointer .sp-thumbnail {
-    position: relative; } }
+    min-height: 100px;
+  }
+  /* line 73, scss/multibanner_type_sync.scss */
+  .view-display-id-block_sync .sp-thumbnail-container .sp-thumbnail-description {
+    /* hide text if it more than N lines  */
+    overflow: hidden;
+    /* for set '...' in absolute position */
+    position: relative;
+    /* use this value to count block height */
+    line-height: 1.2em;
+    /* max-height = line-height (1.2) * lines max number (3) */
+    max-height: 2.4em;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 13px;
+    /* place for '...' */
+  }
+  /* line 88, scss/multibanner_type_sync.scss */
+  .view-display-id-block_sync .sp-thumbnail-container .sp-thumbnail-description:before {
+    /* points in the end */
+    content: '...';
+    /* absolute position */
+    position: absolute;
+    /* set position to right bottom corner of block */
+    right: 0;
+    bottom: 0;
+  }
+  /* line 98, scss/multibanner_type_sync.scss */
+  .view-display-id-block_sync .sp-thumbnail-container .sp-thumbnail-description:after {
+    /* points in the end */
+    content: '';
+    /* absolute position */
+    position: absolute;
+    /* set position to right bottom corner of text */
+    right: 0;
+    /* set width and height */
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+  }
+  /* line 112, scss/multibanner_type_sync.scss */
+  .view-display-id-block_sync .sp-thumbnail-container .sp-thumbnail-text {
+    min-height: 56px;
+    word-break: break-all;
+  }
+  /* line 116, scss/multibanner_type_sync.scss */
+  .view-display-id-block_sync .sp-thumbnail-container .sp-thumbnail-text a {
+    font-size: 13px !important;
+  }
+  /* line 124, scss/multibanner_type_sync.scss */
+  .view-display-id-block_sync .sp-bottom-thumbnails.sp-has-pointer .sp-thumbnail {
+    position: relative;
+  }
+}
 @media (max-width: 700px) {
-  .field--name-field-multibanner-image {
-    width: 100%; }
-    .field--name-field-multibanner-image img {
-      object-fit: cover;
-      object-position: 50% 50%;
-      height: 40vh !important;
-      width: auto !important; }
-    .field--name-field-multibanner-image:after {
-      content: "";
-      display: block;
-      padding-bottom: 100%; }
-
-  .sp-mask {
+  /* line 132, scss/multibanner_type_sync.scss */
+  .view-display-id-block_sync .field--name-field-multibanner-image {
     width: 100%;
-    height: 40vh !important; }
-    .sp-mask:after {
-      content: "";
-      display: block;
-      padding-bottom: 100%; } }
+  }
+  /* line 135, scss/multibanner_type_sync.scss */
+  .view-display-id-block_sync .field--name-field-multibanner-image img {
+    object-fit: cover;
+    object-position: 50% 50%;
+    height: 40vh !important;
+    width: auto !important;
+  }
+  /* line 142, scss/multibanner_type_sync.scss */
+  .view-display-id-block_sync .field--name-field-multibanner-image:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
+  /* line 149, scss/multibanner_type_sync.scss */
+  .view-display-id-block_sync .sp-mask {
+    width: 100%;
+    height: 40vh !important;
+  }
+  /* line 153, scss/multibanner_type_sync.scss */
+  .view-display-id-block_sync .sp-mask:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
+}
 @media only screen and (max-width: 800px) and (min-width: 700px) {
-  .multibanner .slider-pro .sp-slides-container .sp-mask {
-    height: 42vh !important; }
-  .multibanner .slider-pro .sp-slides-container .sp-slide img {
+  /* line 165, scss/multibanner_type_sync.scss */
+  .view-display-id-block_sync .multibanner .slider-pro .sp-slides-container .sp-mask {
     height: 42vh !important;
-    object-position: 50% 50%; } }
-
-/*# sourceMappingURL=multibanner_type_sync.css.map */
+  }
+  /* line 170, scss/multibanner_type_sync.scss */
+  .view-display-id-block_sync .multibanner .slider-pro .sp-slides-container .sp-slide img {
+    height: 42vh !important;
+    object-position: 50% 50%;
+  }
+}
