@@ -28,7 +28,7 @@
           </div>
         {% endfor %}
       </div>
-      
+
       <div class="sp-thumbnails">
         {% for row in rows %}
           <div class="sp-thumbnail">
@@ -53,7 +53,7 @@
   {% else %}
     <ul{{ list.attributes }}>
       {% for row in rows %}
-        <li{{ row.attributes }}>{{ row.content }}</li>
+        <li{{ row.attributes }}>{{ row.content }}<div class="multibanner-box-shadow"></div></li>
       {% endfor %}
     </ul>
   {% endif %}
