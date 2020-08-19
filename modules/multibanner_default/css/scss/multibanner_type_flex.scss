@@ -131,7 +131,7 @@
       width: percentage(1/5);
 
       @include breakpoint(max-width 1000px) {
-        width: percentage(1/2);
+        width: percentage(1/2) !important;
       }
 
       @include breakpoint(max-width 500px) {
@@ -144,7 +144,7 @@
         }
 
         @include breakpoint(max-width 1000px) {
-          width: 100%;
+          width: 100% !important;
         }
 
       }

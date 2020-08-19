@@ -111,7 +111,7 @@
 @media (max-width: 1000px) {
   /* line 129, scss/multibanner_type_flex.scss */
   .view-multibanner-default.view-display-id-block_flex .multibanner-total-7 li {
-    width: 50%;
+    width: 50% !important;
   }
 }
 @media (max-width: 500px) {
@@ -129,7 +129,7 @@
 @media (max-width: 1000px) {
   /* line 141, scss/multibanner_type_flex.scss */
   .view-multibanner-default.view-display-id-block_flex .multibanner-total-7 li:first-child {
-    width: 100%;
+    width: 100% !important;
   }
 }
 @media (min-width: 500px) {
