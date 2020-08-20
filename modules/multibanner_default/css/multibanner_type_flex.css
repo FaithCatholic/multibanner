@@ -117,7 +117,7 @@
 @media (max-width: 500px) {
   /* line 129, scss/multibanner_type_flex.scss */
   .view-multibanner-default.view-display-id-block_flex .multibanner-total-7 li {
-    width: 100%;
+    width: 100% !important;
   }
 }
 @media (min-width: 1000px) {
