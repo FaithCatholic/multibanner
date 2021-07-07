@@ -3,13 +3,13 @@
 namespace Drupal\multibanner;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;
-use Drupal\Component\Plugin\ConfigurablePluginInterface;
+use Drupal\Component\Plugin\ConfigurableInterface;
 use Drupal\Core\Plugin\PluginFormInterface;
 
 /**
  * Defines the interface for multibanner types.
  */
-interface MultibannerTypeInterface extends PluginInspectionInterface, ConfigurablePluginInterface, PluginFormInterface {
+interface MultibannerTypeInterface extends PluginInspectionInterface, ConfigurableInterface, PluginFormInterface {
 
   /**
    * Returns the display label.

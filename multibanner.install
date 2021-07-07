@@ -13,7 +13,7 @@
  */
 function _multibanner_check_entity_version() {
   if (\Drupal::moduleHandler()->moduleExists('entity')) {
-    $info = system_get_info('module', 'entity');
+    $info = \Drupal::service('extension.list.module')->getExtensionInfo('entity');
     if (version_compare($info['version'], '8.x-1.0-alpha3') >= 0) {
       return TRUE;
     }

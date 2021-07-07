@@ -52,6 +52,11 @@ use Drupal\user\UserInterface;
  *   permission_granularity = "entity_type",
  *   admin_permission = "administer multibanner",
  *   field_ui_base_route = "entity.multibanner_bundle.edit_form",
+  *   revision_metadata_keys = {
+ *     "revision_user" = "revision_user",
+ *     "revision_created" = "revision_created",
+ *     "revision_log_message" = "revision_log",
+ *   },
  *   links = {
  *     "add-page" = "/multibanner/add",
  *     "add-form" = "/multibanner/add/{multibanner_bundle}",
@@ -293,7 +298,7 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
       ->setTranslatable(TRUE)
       ->setRevisionable(TRUE)
       ->setDisplayOptions('view', [
-        'type' => 'hidden',
+        'region' => 'hidden',
       ])
       ->setDisplayOptions('form', [
         'type' => 'language_select',
@@ -393,14 +398,12 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
     $fields['revision_timestamp'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Revision timestamp'))
       ->setDescription(t('The time that the current revision was created.'))
-      ->setQueryable(FALSE)
       ->setRevisionable(TRUE);
 
     $fields['revision_uid'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Revision publisher ID'))
       ->setDescription(t('The user ID of the publisher of the current revision.'))
       ->setSetting('target_type', 'user')
-      ->setQueryable(FALSE)
       ->setRevisionable(TRUE);
 
     $fields['revision_log'] = BaseFieldDefinition::create('string_long')

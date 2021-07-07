@@ -128,7 +128,7 @@ class MultibannerDevelGenerate extends DevelGenerateBase implements ContainerFac
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    $entity_manager = $container->get('entity.manager');
+    $entity_manager = $container->get('entity_type.manager');
     return new static(
       $configuration, $plugin_id, $plugin_definition,
       $entity_manager->getStorage('multibanner'),
@@ -251,14 +251,15 @@ class MultibannerDevelGenerate extends DevelGenerateBase implements ContainerFac
       $start = time();
       for ($i = 1; $i <= $values['num']; $i++) {
         $this->createMultibannerItem($values);
-        if (function_exists('drush_log') && $i % drush_get_option('feedback', 1000) == 0) {
-          $now = time();
-          drush_log(dt('Completed !feedback multibanner items (!rate multibanner/min)', [
-            '!feedback' => drush_get_option('feedback', 1000),
-            '!rate' => (drush_get_option('feedback', 1000) * 60) / ($now - $start),
-          ]), 'ok');
-          $start = $now;
-        }
+        // drush_log removed from Drupal 9.
+        // if (function_exists('drush_log') && $i % drush_get_option('feedback', 1000) == 0) {
+        //   $now = time();
+        //   drush_log(dt('Completed !feedback multibanner items (!rate multibanner/min)', [
+        //     '!feedback' => drush_get_option('feedback', 1000),
+        //     '!rate' => (drush_get_option('feedback', 1000) * 60) / ($now - $start),
+        //   ]), 'ok');
+        //   $start = $now;
+        // }
       }
     }
     $this->setMessage($this->formatPlural($values['num'], '1 multibanner created.', 'Finished creating @count multibanner items.'));
@@ -345,7 +346,7 @@ class MultibannerDevelGenerate extends DevelGenerateBase implements ContainerFac
   /**
    * {@inheritdoc}
    */
-  public function validateDrushParams($args) {
+  public function validateDrushParams($args, array $options = []) {
     $add_language = drush_get_option('languages');
     if (!empty($add_language)) {
       $add_language = explode(',', str_replace(' ', '', $add_language));
@@ -357,7 +358,7 @@ class MultibannerDevelGenerate extends DevelGenerateBase implements ContainerFac
     $values['kill'] = drush_get_option('kill');
     $values['name_length'] = drush_get_option('name_length', 6);
     $values['num'] = array_shift($args);
-    $selected_bundles = _convert_csv_to_array(drush_get_option('bundles', []));
+    $selected_bundles = \Drush\StringUtils::csvToArray(drush_get_option('bundles', []));
 
     if (empty($selected_bundles)) {
       return drush_set_error('DEVEL_GENERATE_NO_MULTIBANNER_BUNDLES', dt('No multibanner bundles available'));
@@ -425,7 +426,7 @@ class MultibannerDevelGenerate extends DevelGenerateBase implements ContainerFac
       'uid' => $uid,
       'revision' => mt_rand(0, 1),
       'status' => TRUE,
-      'created' => REQUEST_TIME - mt_rand(0, $results['time_range']),
+      'created' => \Drupal::time()->getRequestTime() - mt_rand(0, $results['time_range']),
       'langcode' => $this->getLangcode($results),
     ]);
 

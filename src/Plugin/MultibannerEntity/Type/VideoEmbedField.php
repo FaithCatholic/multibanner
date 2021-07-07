@@ -12,6 +12,7 @@ use Drupal\multibanner\MultibannerTypeBase;
 use Drupal\video_embed_field\ProviderManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Config\Config;
+use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
 
 /**
  * Provides multibanner type plugin for video embed field.
@@ -180,12 +181,12 @@ class VideoEmbedField extends MultibannerTypeBase {
       'bundle' => $multibanner_bundle_id,
     ])->save();
     // Make the field visible on the form display.
-    $form_display = entity_get_form_display('multibanner', $multibanner_bundle_id, 'default');
+    $form_display = EntityDisplayRepositoryInterface::getFormDisplay('multibanner', $multibanner_bundle_id, 'default');
     $form_display->setComponent(static::VIDEO_EMBED_FIELD_DEFAULT_NAME, [
       'type' => 'video_embed_field_textfield',
     ])->save();
     // Make the field visible on the multibanner entity itself.
-    $dispaly = entity_get_display('multibanner', $multibanner_bundle_id, 'default');
+    $disaply = EntityDisplayRepositoryInterface::getViewDisplay('multibanner', $multibanner_bundle_id, 'default');
     $dispaly->setComponent(static::VIDEO_EMBED_FIELD_DEFAULT_NAME, [
       'type' => 'video_embed_field_video',
     ])->save();

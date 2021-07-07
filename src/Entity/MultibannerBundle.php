@@ -45,6 +45,11 @@ use Drupal\multibanner\MultibannerInterface;
  *     "field_map",
  *     "status",
  *   },
+  *   revision_metadata_keys = {
+ *     "revision_user" = "revision_user",
+ *     "revision_created" = "revision_created",
+ *     "revision_log_message" = "revision_log",
+ *   },
  *   links = {
  *     "add-form" = "/admin/structure/multibanner/add",
  *     "edit-form" = "/admin/structure/multibanner/manage/{multibanner_bundle}",

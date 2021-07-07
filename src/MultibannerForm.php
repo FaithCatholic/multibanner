@@ -3,12 +3,12 @@
 namespace Drupal\multibanner;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\entity\Form\RevisionableContentEntityForm;
+use Drupal\Core\Entity\ContentEntityForm;
 
 /**
  * Form controller for the multibanner edit forms.
  */
-class MultibannerForm extends RevisionableContentEntityForm {
+class MultibannerForm extends ContentEntityForm {
 
   /**
    * Default settings for this multibanner bundle.
@@ -34,7 +34,7 @@ class MultibannerForm extends RevisionableContentEntityForm {
     // If this is a new multibanner, fill in the default values.
     if ($multibanner->isNew()) {
       $multibanner->setPublisherId($this->currentUser()->id());
-      $multibanner->setCreatedTime(REQUEST_TIME);
+      $multibanner->setCreatedTime(\Drupal::time()->getRequestTime());
     }
   }
 

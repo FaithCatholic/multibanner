@@ -3,7 +3,7 @@
 namespace Drupal\multibanner;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
-use Drupal\entity\Entity\RevisionableEntityBundleInterface;
+use Drupal\Core\Entity\RevisionableEntityBundleInterface;
 
 /**
  * Provides an interface defining a multibanner bundle entity.

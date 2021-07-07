@@ -76,13 +76,13 @@ function multibanner_theme_suggestions_multibanner(array $variables) {
  * @throws Exception
  */
 function multibanner_copy_icons($source, $destination) {
-  if (!file_prepare_directory($destination, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
+  if (!\Drupal\Core\File\FileSystemInterface::prepareDirectory()) {
     throw new Exception("Unable to create directory $destination.");
   }
 
-  $files = file_scan_directory($source, '/.*\.(png|jpg)$/');
+  $files = \Drupal\Core\File\FileSystemInterface::scanDirectory($source, '/.*\.(png|jpg)$/');
   foreach ($files as $file) {
-    $result = file_unmanaged_copy($file->uri, $destination, FILE_EXISTS_REPLACE);
+    $result = \Drupal\Core\File\FileSystemInterface::copy($file->uri, $destination, \Drupal\Core\File\FileSystemInterface::EXISTS_REPLACE);
     if (!$result) {
       throw new Exception("Unable to copy {$file->uri} to $destination.");
     }

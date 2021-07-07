@@ -72,7 +72,7 @@ class MultibannerThumbnailFormatter extends ImageFormatter {
       $configuration['view_mode'],
       $configuration['third_party_settings'],
       $container->get('current_user'),
-      $container->get('entity.manager')->getStorage('image_style'),
+      $container->get('entity_type.manager')->getStorage('image_style'),
       $container->get('renderer')
     );
   }

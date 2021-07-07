@@ -6,7 +6,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
-use Drupal\user\PrivateTempStoreFactory;
+use Drupal\Core\TempStore\PrivateTempStoreFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -25,7 +25,7 @@ class DeleteMultiple extends ConfirmFormBase {
   /**
    * The tempstore factory.
    *
-   * @var \Drupal\user\PrivateTempStoreFactory
+   * @var \Drupal\Core\TempStore\PrivateTempStoreFactory
    */
   protected $tempStoreFactory;
 
@@ -39,7 +39,7 @@ class DeleteMultiple extends ConfirmFormBase {
   /**
    * Constructs a DeleteMultiple form object.
    *
-   * @param \Drupal\user\PrivateTempStoreFactory $temp_store_factory
+   * @param \Drupal\Core\TempStore\PrivateTempStoreFactory $temp_store_factory
    *   The tempstore factory.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $manager
    *   The entity manager.
@@ -187,7 +187,7 @@ class DeleteMultiple extends ConfirmFormBase {
       }
 
       if ($total_count) {
-        drupal_set_message($this->formatPlural($total_count, 'Deleted 1 multibanner.', 'Deleted @count multibanner entities.'));
+        \Drupal\Core\Messenger\MessengerInterface::addMessage($this->formatPlural($total_count, 'Deleted 1 multibanner.', 'Deleted @count multibanner entities.'));
       }
 
       $this->tempStoreFactory->get('multibanner_multiple_delete_confirm')->delete(\Drupal::currentUser()->id());

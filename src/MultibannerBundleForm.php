@@ -364,10 +364,10 @@ class MultibannerBundleForm extends EntityForm {
 
     $t_args = ['%name' => $bundle->label()];
     if ($status == SAVED_UPDATED) {
-      drupal_set_message($this->t('The multibanner bundle %name has been updated.', $t_args));
+      \Drupal\Core\Messenger\MessengerInterface::addMessage($this->t('The multibanner bundle %name has been updated.', $t_args));
     }
     elseif ($status == SAVED_NEW) {
-      drupal_set_message($this->t('The multibanner bundle %name has been added.', $t_args));
+      \Drupal\Core\Messenger\MessengerInterface::addMessage($this->t('The multibanner bundle %name has been added.', $t_args));
       $this->logger('multibanner')->notice('Added bundle %name.', $t_args);
     }
 
