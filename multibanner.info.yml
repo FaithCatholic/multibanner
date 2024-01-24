@@ -2,7 +2,7 @@ name: Multibanner
 description: 'Multibanner entities and configuration.'
 type: module
 package: Multibanner
-core_version_requirement: ^8 || ^9 || ^10
+core_version_requirement: ^9.3 || ^10
 dependencies:
   - drupal:field
   - drupal:image

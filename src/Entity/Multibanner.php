@@ -220,6 +220,7 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
       $thumbnail_uri = $this->getType()->thumbnail($this);
     }
     $existing = \Drupal::entityQuery('file')
+      ->accessCheck(TRUE)
       ->condition('uri', $thumbnail_uri)
       ->execute();
 

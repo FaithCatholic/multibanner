@@ -299,7 +299,7 @@ class MultibannerDevelGenerate extends DevelGenerateBase implements ContainerFac
       'title' => $this->t('Generating multibanner'),
       'operations' => $operations,
       'finished' => 'devel_generate_batch_finished',
-      'file' => drupal_get_path('module', 'devel_generate') . '/devel_generate.batch.inc',
+      'file' => \Drupal::service('extension.list.module')->getPath('devel_generate') . '/devel_generate.batch.inc',
     ];
     batch_set($batch);
   }
@@ -377,6 +377,7 @@ class MultibannerDevelGenerate extends DevelGenerateBase implements ContainerFac
    */
   protected function multibannerKill($values) {
     $mids = $this->multibannerStorage->getQuery()
+      ->accessCheck(FALSE)
       ->condition('bundle', $values['multibanner_bundles'], 'IN')
       ->execute();
 
@@ -399,6 +400,7 @@ class MultibannerDevelGenerate extends DevelGenerateBase implements ContainerFac
   protected function preGenerate(&$results) {
     // Get user id.
     $users = $this->userStorage->getQuery()
+      ->accessCheck(FALSE)
       ->range(0, 50)
       ->execute();
     $users = array_merge($users, ['0']);
