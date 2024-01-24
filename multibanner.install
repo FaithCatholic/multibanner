@@ -45,7 +45,7 @@ function multibanner_requirements($phase) {
  * Implements hook_install().
  */
 function multibanner_install() {
-  $source = drupal_get_path('module', 'multibanner') . '/images/icons';
+  $source = \Drupal::service('extension.list.module')->getPath('multibanner') . '/images/icons';
   $destination = \Drupal::config('multibanner.settings')->get('icon_base');
   multibanner_copy_icons($source, $destination);
 }
