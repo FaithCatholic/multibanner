@@ -1,9 +1,19 @@
-{ 
-"name": "faithcatholic/multibanner",
- "type": "drupal-module",
- "description": "Flexible, responsive banner.",
- "keywords": ["Drupal"],
- "license": "GPL-2.0+",
- "minimum-stability": "dev",
-  "require": { }
+{
+    "name": "faithcatholic/multibanner",
+    "type": "drupal-module",
+    "description": "Flexible, responsive banner.",
+    "keywords": [
+        "Drupal"
+    ],
+    "license": "GPL-2.0+",
+    "minimum-stability": "dev",
+    "require": {
+        "drupal/entity": "^1",
+        "drupal/video_embed_field": "^3"
+    },
+    "require-dev": {
+        "drupal/admin_toolbar": "^3",
+        "drupal/devel": "^5",
+        "drush/drush": "*"
+    }
 }
