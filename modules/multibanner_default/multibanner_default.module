@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * @file
+ */
+
+/**
  * Implements hook_preprocess_block().
  */
 function multibanner_default_preprocess_block(&$variables) {

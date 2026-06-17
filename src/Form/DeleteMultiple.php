@@ -2,6 +2,7 @@
 
 namespace Drupal\multibanner\Form;
 
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -54,7 +55,7 @@ class DeleteMultiple extends ConfirmFormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('user.private_tempstore'),
+      $container->get('tempstore.private'),
       $container->get('entity_type.manager')
     );
   }
@@ -187,7 +188,7 @@ class DeleteMultiple extends ConfirmFormBase {
       }
 
       if ($total_count) {
-        \Drupal\Core\Messenger\MessengerInterface::addMessage($this->formatPlural($total_count, 'Deleted 1 multibanner.', 'Deleted @count multibanner entities.'));
+        MessengerInterface::addMessage($this->formatPlural($total_count, 'Deleted 1 multibanner.', 'Deleted @count multibanner entities.'));
       }
 
       $this->tempStoreFactory->get('multibanner_multiple_delete_confirm')->delete(\Drupal::currentUser()->id());

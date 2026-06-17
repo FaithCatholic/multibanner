@@ -5,13 +5,15 @@
  * Provides multibanner entities.
  */
 
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\File\FileExists;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\Core\Template\Attribute;
 
 /**
  * Implements hook_help().
  */
-function multibanner_help($route_name, RouteMatchInterface $route_match) {
+function multibanner_help(string $route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     case 'help.page.multibanner':
       $output = '<h3>' . t('About') . '</h3>';
@@ -76,13 +78,13 @@ function multibanner_theme_suggestions_multibanner(array $variables) {
  * @throws Exception
  */
 function multibanner_copy_icons($source, $destination) {
-  if (!\Drupal\Core\File\FileSystemInterface::prepareDirectory()) {
+  if (!\Drupal::service('file_system')->prepareDirectory($destination, FileSystemInterface::CREATE_DIRECTORY)) {
     throw new Exception("Unable to create directory $destination.");
   }
 
-  $files = \Drupal\Core\File\FileSystemInterface::scanDirectory($source, '/.*\.(png|jpg)$/');
+  $files = \Drupal::service('file_system')->scanDirectory($source, '/.*\.(png|jpg)$/');
   foreach ($files as $file) {
-    $result = \Drupal\Core\File\FileSystemInterface::copy($file->uri, $destination, \Drupal\Core\File\FileSystemInterface::EXISTS_REPLACE);
+    $result = \Drupal::service('file_system')->copy($file->uri, $destination, FileExists::Replace);
     if (!$result) {
       throw new Exception("Unable to copy {$file->uri} to $destination.");
     }
@@ -92,7 +94,7 @@ function multibanner_copy_icons($source, $destination) {
 /**
  * Implements hook_field_widget_form_alter().
  */
-function multibanner_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
+function multibanner_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
   if (array_key_exists('entities', $element)) {
     if ($element['entities']['#entity_type'] === 'multibanner') {
       // Hide "add" buttons after nine banners.
@@ -110,9 +112,10 @@ function multibanner_field_widget_form_alter(&$element, \Drupal\Core\Form\FormSt
           $element['actions']['ief_add_existing']['#access'] = FALSE;
         }
         $element['#description'] = t('<p><em>You may add <strong style="color:orange;">0 additional banner(s)</strong>. You have reached the limit of 9.</em></p>');
-      } else {
+      }
+      else {
         $left = (string) 9 - $num_entities;
-        $element['#description'] = t('<p><em>You may add up to <strong style="color:green;">'. $left .' additional banner(s)</strong>. A total of 9 is allowed.</em></p>');
+        $element['#description'] = t('<p><em>You may add up to <strong style="color:green;">' . $left . ' additional banner(s)</strong>. A total of 9 is allowed.</em></p>');
       }
     }
   }

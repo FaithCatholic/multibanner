@@ -2,6 +2,7 @@
 
 namespace Drupal\multibanner\Plugin\DevelGenerate;
 
+use Drush\StringUtils;
 use Drupal\Core\Datetime\DateFormatter;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -259,7 +260,7 @@ class MultibannerDevelGenerate extends DevelGenerateBase implements ContainerFac
         //     '!rate' => (drush_get_option('feedback', 1000) * 60) / ($now - $start),
         //   ]), 'ok');
         //   $start = $now;
-        // }
+        // }.
       }
     }
     $this->setMessage($this->formatPlural($values['num'], '1 multibanner created.', 'Finished creating @count multibanner items.'));
@@ -358,7 +359,7 @@ class MultibannerDevelGenerate extends DevelGenerateBase implements ContainerFac
     $values['kill'] = drush_get_option('kill');
     $values['name_length'] = drush_get_option('name_length', 6);
     $values['num'] = array_shift($args);
-    $selected_bundles = \Drush\StringUtils::csvToArray(drush_get_option('bundles', []));
+    $selected_bundles = StringUtils::csvToArray(drush_get_option('bundles', []));
 
     if (empty($selected_bundles)) {
       return drush_set_error('DEVEL_GENERATE_NO_MULTIBANNER_BUNDLES', dt('No multibanner bundles available'));

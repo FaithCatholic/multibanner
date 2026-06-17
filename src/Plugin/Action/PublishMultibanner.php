@@ -20,14 +20,14 @@ class PublishMultibanner extends ActionBase {
   /**
    * {@inheritdoc}
    */
-  public function execute(Multibanner $entity = NULL) {
+  public function execute(?Multibanner $entity = NULL) {
     $entity->setPublished(TRUE)->save();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function access($object, AccountInterface $account = NULL, $return_as_object = FALSE) {
+  public function access($object, ?AccountInterface $account = NULL, $return_as_object = FALSE) {
     /** @var \Drupal\multibanner\MultibannerInterface $object */
     $result = $object->access('update', $account, TRUE)
       ->andIf($object->status->access('edit', $account, TRUE));

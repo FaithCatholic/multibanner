@@ -52,7 +52,7 @@ use Drupal\user\UserInterface;
  *   permission_granularity = "entity_type",
  *   admin_permission = "administer multibanner",
  *   field_ui_base_route = "entity.multibanner_bundle.edit_form",
-  *   revision_metadata_keys = {
+ *   revision_metadata_keys = {
  *     "revision_user" = "revision_user",
  *     "revision_created" = "revision_created",
  *     "revision_log_message" = "revision_log",
@@ -84,7 +84,7 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
   /**
    * A queue based multibanner operation to download thumbnails is being performed.
    *
-   * @var boolean
+   * @var bool
    */
   protected $queued_thumbnail_download = FALSE;
 
@@ -183,7 +183,7 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
     foreach ($this->bundle->entity->field_map as $source_field => $destination_field) {
       // Only save value in entity field if empty. Do not overwrite existing
       // data.
-      // @TODO We might modify that in the future but let's leave it like this
+      // @todo We might modify that in the future but let's leave it like this
       // for now.
       if ($this->hasField($destination_field) && $this->{$destination_field}->isEmpty() && ($value = $this->getType()->getField($this, $source_field))) {
         $this->set($destination_field, $value);
@@ -238,7 +238,7 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
       $this->thumbnail->target_id = $file->id();
     }
 
-    // TODO - We should probably use something smarter (tokens, ...).
+    // @todo We should probably use something smarter (tokens, ...).
     $this->thumbnail->alt = t('Thumbnail');
     $this->thumbnail->title = $this->label();
   }

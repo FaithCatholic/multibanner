@@ -28,19 +28,19 @@ abstract class MultibannerTypeBase extends PluginBase implements MultibannerType
   /**
    * The entity type manager service.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface;
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
 
   /**
    * The entity field manager service.
    *
-   * @var \Drupal\Core\Entity\EntityFieldManagerInterface;
+   * @var \Drupal\Core\Entity\EntityFieldManagerInterface
    */
   protected $entityFieldManager;
 
   /**
-   * multibanner image config object.
+   * Multibanner image config object.
    *
    * @var \Drupal\Core\Config\Config
    */

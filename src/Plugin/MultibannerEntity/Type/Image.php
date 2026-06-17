@@ -24,16 +24,16 @@ use Drupal\Core\Form\FormStateInterface;
 class Image extends MultibannerTypeBase {
 
   /**
-   * The image factory service..
+   * The image factory service.
    *
-   * @var \Drupal\Core\Image\ImageFactory;
+   * @var \Drupal\Core\Image\ImageFactory
    */
   protected $imageFactory;
 
   /**
    * The exif data.
    *
-   * @var array.
+   * @var array
    */
   protected $exif;
 
@@ -79,21 +79,21 @@ class Image extends MultibannerTypeBase {
    * {@inheritdoc}
    */
   public function providedFields() {
-    $fields = array(
+    $fields = [
       'mime' => $this->t('File MIME'),
       'width' => $this->t('Width'),
       'height' => $this->t('Height'),
-    );
+    ];
 
     if (!empty($this->configuration['gather_exif'])) {
-      $fields += array(
+      $fields += [
         'model' => $this->t('Camera model'),
         'created' => $this->t('Image creation datetime'),
         'iso' => $this->t('Iso'),
         'exposure' => $this->t('Exposure time'),
         'aperture' => $this->t('Aperture value'),
         'focal_length' => $this->t('Focal length'),
-      );
+      ];
     }
     return $fields;
   }

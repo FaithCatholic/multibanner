@@ -53,18 +53,18 @@ class YouTubeMinimal extends ProviderPluginBase {
    */
   protected function getTimeIndex() {
     preg_match('/[&\?]t=(?<timeindex>\d+)/', $this->getInput(), $matches);
-    return isset($matches['timeindex']) ? $matches['timeindex'] : 0;
+    return $matches['timeindex'] ?? 0;
   }
 
   /**
    * Extract the language preference from the URL for use in closed captioning.
    *
-   * @return string|FALSE
+   * @return string|false
    *   The language preference if one exists or FALSE if one could not be found.
    */
   protected function getLanguagePreference() {
     preg_match('/[&\?]hl=(?<language>[a-z\-]*)/', $this->getInput(), $matches);
-    return isset($matches['language']) ? $matches['language'] : FALSE;
+    return $matches['language'] ?? FALSE;
   }
 
   /**
@@ -88,7 +88,7 @@ class YouTubeMinimal extends ProviderPluginBase {
    */
   public static function getIdFromInput($input) {
     preg_match('/^https?:\/\/(www\.)?((?!.*list=)youtube\.com\/watch\?.*v=|youtu\.be\/)(?<id>[0-9A-Za-z_-]*)/', $input, $matches);
-    return isset($matches['id']) ? $matches['id'] : FALSE;
+    return $matches['id'] ?? FALSE;
   }
 
 }

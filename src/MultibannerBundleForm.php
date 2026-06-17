@@ -2,6 +2,7 @@
 
 namespace Drupal\multibanner;
 
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
@@ -106,7 +107,7 @@ class MultibannerBundleForm extends EntityForm {
       '#weight' => -100,
     ];
 
-    // @todo: '#disabled' not always FALSE.
+    // @todo '#disabled' not always FALSE.
     $form['id'] = [
       '#type' => 'machine_name',
       '#default_value' => $bundle->id(),
@@ -221,7 +222,7 @@ class MultibannerBundleForm extends EntityForm {
           '#type' => 'select',
           '#title' => $field_label,
           '#options' => $options,
-          '#default_value' => isset($bundle->field_map[$field_name]) ? $bundle->field_map[$field_name] : '_none',
+          '#default_value' => $bundle->field_map[$field_name] ?? '_none',
         ];
       }
     }
@@ -350,7 +351,9 @@ class MultibannerBundleForm extends EntityForm {
     // Save field mapping.
     $entity->field_map = array_filter(
       $form_state->getValue('field_mapping', []),
-      function ($item) { return $item != '_none'; }
+      function ($item) {
+        return $item != '_none';
+      }
     );
   }
 
@@ -364,16 +367,16 @@ class MultibannerBundleForm extends EntityForm {
 
     $t_args = ['%name' => $bundle->label()];
     if ($status == SAVED_UPDATED) {
-      \Drupal\Core\Messenger\MessengerInterface::addMessage($this->t('The multibanner bundle %name has been updated.', $t_args));
+      MessengerInterface::addMessage($this->t('The multibanner bundle %name has been updated.', $t_args));
     }
     elseif ($status == SAVED_NEW) {
-      \Drupal\Core\Messenger\MessengerInterface::addMessage($this->t('The multibanner bundle %name has been added.', $t_args));
+      MessengerInterface::addMessage($this->t('The multibanner bundle %name has been added.', $t_args));
       $this->logger('multibanner')->notice('Added bundle %name.', $t_args);
     }
 
     // Override the "status" base field default value, for this bundle.
     $fields = $this->entityFieldManager->getFieldDefinitions('multibanner', $bundle->id());
-    $multibanner = $this->entityTypeManager->getStorage('multibanner')->create(array('bundle' => $bundle->id()));
+    $multibanner = $this->entityTypeManager->getStorage('multibanner')->create(['bundle' => $bundle->id()]);
     $value = (bool) $form_state->getValue(['options', 'status']);
     if ($multibanner->status->value != $value) {
       $fields['status']->getConfig($bundle->id())->setDefaultValue($value)->save();

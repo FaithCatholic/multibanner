@@ -35,12 +35,12 @@ class Multibanner extends StylePluginBase {
   protected $usesRowClass = TRUE;
 
   /**
-   * Set default options
+   * Set default options.
    */
   protected function defineOptions() {
     $options = parent::defineOptions();
-    $options['class'] = array('default' => '');
-    $options['wrapper_class'] = array('default' => '');
+    $options['class'] = ['default' => ''];
+    $options['wrapper_class'] = ['default' => ''];
     return $options;
   }
 
@@ -49,20 +49,20 @@ class Multibanner extends StylePluginBase {
    */
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
     parent::buildOptionsForm($form, $form_state);
-    $form['wrapper_class'] = array(
+    $form['wrapper_class'] = [
       '#title' => $this->t('Wrapper class'),
       '#description' => $this->t('The class to provide on the list element wrapper.'),
       '#type' => 'textfield',
       '#size' => '30',
       '#default_value' => $this->options['wrapper_class'],
-    );
-    $form['class'] = array(
+    ];
+    $form['class'] = [
       '#title' => $this->t('List class'),
       '#description' => $this->t('The class to provide on the list element itself.'),
       '#type' => 'textfield',
       '#size' => '30',
       '#default_value' => $this->options['class'],
-    );
+    ];
   }
 
 }

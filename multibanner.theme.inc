@@ -82,21 +82,22 @@ function template_preprocess_multibanner(&$variables) {
  *   - view: A View object.
  */
 function template_preprocess_views_view_multibanner(&$variables) {
-  $handler  = $variables['view']->style_plugin;
+  $handler = $variables['view']->style_plugin;
 
   // Fetch classes from handler options.
   if ($handler->options['class']) {
     $class = explode(' ', $handler->options['class']);
     $class = array_map('\Drupal\Component\Utility\Html::cleanCssIdentifier', $class);
-    $variables['list']['attributes'] = new Attribute(array('class' => $class));
+    $variables['list']['attributes'] = new Attribute(['class' => $class]);
   }
 
   // Fetch wrapper classes from handler options.
   if ($handler->options['wrapper_class']) {
     $wrapper_class = explode(' ', $handler->options['wrapper_class']);
     $variables['attributes']['class'] = array_map('\Drupal\Component\Utility\Html::cleanCssIdentifier', $wrapper_class);
-  } else {
-    $variables['attributes']['class'] = array();
+  }
+  else {
+    $variables['attributes']['class'] = [];
   }
 
   // Banner layout vars.
@@ -111,7 +112,7 @@ function template_preprocess_views_view_multibanner(&$variables) {
   $banner_count = count($variables['view']->result);
   $variables['banner_count'] = $banner_count;
   $variables['attributes']['class'][] = 'multibanner';
-  $variables['attributes']['class'][] = 'multibanner-total-'. $banner_count;
+  $variables['attributes']['class'][] = 'multibanner-total-' . $banner_count;
 
   // Finish rendering.
   template_preprocess_views_view_unformatted($variables);
