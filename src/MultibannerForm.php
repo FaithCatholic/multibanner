@@ -34,7 +34,7 @@ class MultibannerForm extends ContentEntityForm {
     // If this is a new multibanner, fill in the default values.
     if ($multibanner->isNew()) {
       $multibanner->setPublisherId($this->currentUser()->id());
-      $multibanner->setCreatedTime(\Drupal::time()->getRequestTime());
+      $multibanner->setCreatedTime($this->time->getRequestTime());
     }
   }
 

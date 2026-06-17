@@ -367,10 +367,10 @@ class MultibannerBundleForm extends EntityForm {
 
     $t_args = ['%name' => $bundle->label()];
     if ($status == SAVED_UPDATED) {
-      MessengerInterface::addMessage($this->t('The multibanner bundle %name has been updated.', $t_args));
+      $this->messenger()->addMessage($this->t('The multibanner bundle %name has been updated.', $t_args));
     }
     elseif ($status == SAVED_NEW) {
-      MessengerInterface::addMessage($this->t('The multibanner bundle %name has been added.', $t_args));
+      $this->messenger()->addMessage($this->t('The multibanner bundle %name has been added.', $t_args));
       $this->logger('multibanner')->notice('Added bundle %name.', $t_args);
     }
 
@@ -383,6 +383,8 @@ class MultibannerBundleForm extends EntityForm {
     }
 
     $form_state->setRedirectUrl($bundle->toUrl('collection'));
+
+    return $status;
   }
 
 }

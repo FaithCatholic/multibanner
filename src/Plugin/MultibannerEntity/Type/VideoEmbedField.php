@@ -180,14 +180,16 @@ class VideoEmbedField extends MultibannerTypeBase {
       'required' => TRUE,
       'bundle' => $multibanner_bundle_id,
     ])->save();
+    /** @var \Drupal\Core\Entity\EntityDisplayRepositoryInterface $display_repository */
+    $display_repository = \Drupal::service('entity_display.repository');
     // Make the field visible on the form display.
-    $form_display = EntityDisplayRepositoryInterface::getFormDisplay('multibanner', $multibanner_bundle_id, 'default');
+    $form_display = $display_repository->getFormDisplay('multibanner', $multibanner_bundle_id, 'default');
     $form_display->setComponent(static::VIDEO_EMBED_FIELD_DEFAULT_NAME, [
       'type' => 'video_embed_field_textfield',
     ])->save();
     // Make the field visible on the multibanner entity itself.
-    $disaply = EntityDisplayRepositoryInterface::getViewDisplay('multibanner', $multibanner_bundle_id, 'default');
-    $dispaly->setComponent(static::VIDEO_EMBED_FIELD_DEFAULT_NAME, [
+    $view_display = $display_repository->getViewDisplay('multibanner', $multibanner_bundle_id, 'default');
+    $view_display->setComponent(static::VIDEO_EMBED_FIELD_DEFAULT_NAME, [
       'type' => 'video_embed_field_video',
     ])->save();
   }

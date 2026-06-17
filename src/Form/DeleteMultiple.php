@@ -2,10 +2,10 @@
 
 namespace Drupal\multibanner\Form;
 
-use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\Core\TempStore\PrivateTempStoreFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -38,16 +38,26 @@ class DeleteMultiple extends ConfirmFormBase {
   protected $storage;
 
   /**
+   * The current user.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   */
+  protected $currentUser;
+
+  /**
    * Constructs a DeleteMultiple form object.
    *
    * @param \Drupal\Core\TempStore\PrivateTempStoreFactory $temp_store_factory
    *   The tempstore factory.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $manager
    *   The entity manager.
+   * @param \Drupal\Core\Session\AccountInterface $current_user
+   *   The current user.
    */
-  public function __construct(PrivateTempStoreFactory $temp_store_factory, EntityTypeManagerInterface $manager) {
+  public function __construct(PrivateTempStoreFactory $temp_store_factory, EntityTypeManagerInterface $manager, AccountInterface $current_user) {
     $this->tempStoreFactory = $temp_store_factory;
     $this->storage = $manager->getStorage('multibanner');
+    $this->currentUser = $current_user;
   }
 
   /**
@@ -56,7 +66,8 @@ class DeleteMultiple extends ConfirmFormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('tempstore.private'),
-      $container->get('entity_type.manager')
+      $container->get('entity_type.manager'),
+      $container->get('current_user')
     );
   }
 
@@ -92,7 +103,7 @@ class DeleteMultiple extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $this->entityInfo = $this->tempStoreFactory->get('multibanner_multiple_delete_confirm')->get(\Drupal::currentUser()->id());
+    $this->entityInfo = $this->tempStoreFactory->get('multibanner_multiple_delete_confirm')->get($this->currentUser->id());
     if (empty($this->entityInfo)) {
       return new RedirectResponse($this->getCancelUrl()->setAbsolute()->toString());
     }
@@ -188,10 +199,10 @@ class DeleteMultiple extends ConfirmFormBase {
       }
 
       if ($total_count) {
-        MessengerInterface::addMessage($this->formatPlural($total_count, 'Deleted 1 multibanner.', 'Deleted @count multibanner entities.'));
+        $this->messenger()->addMessage($this->formatPlural($total_count, 'Deleted 1 multibanner.', 'Deleted @count multibanner entities.'));
       }
 
-      $this->tempStoreFactory->get('multibanner_multiple_delete_confirm')->delete(\Drupal::currentUser()->id());
+      $this->tempStoreFactory->get('multibanner_multiple_delete_confirm')->delete($this->currentUser->id());
     }
 
     $form_state->setRedirect('system.admin_content');
