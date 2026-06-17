@@ -5,9 +5,8 @@
  * Theme functions for the multibanner module.
  */
 
-use Drupal\Core\Render\Element;
 use Drupal\Core\Link;
-use Drupal\Component\Utility\Html;
+use Drupal\multibanner\Hook\ThemeHooks;
 
 /**
  * Prepares variables for list of available multibanner bundles.
@@ -44,32 +43,7 @@ function template_preprocess_multibanner_add_list(&$variables) {
  *   - multibanner: An individual multibanner for display.
  */
 function template_preprocess_multibanner(&$variables) {
-  /** @var \Drupal\multibanner\MultibannerInterface $multibanner */
-  $multibanner = $variables['elements']['#multibanner'];
-
-  $variables['name'] = $multibanner->label();
-
-  // Helpful $content variable for templates.
-  foreach (Element::children($variables['elements']) as $key) {
-    $variables['content'][$key] = $variables['elements'][$key];
-  }
-
-  $variables['attributes']['class'][] = 'multibanner';
-  $variables['attributes']['class'][] = Html::getClass('multibanner-' . $multibanner->bundle());
-  if (!$multibanner->isPublished()) {
-    $variables['attributes']['class'][] = 'unpublished';
-  }
-  if ($variables['elements']['#view_mode']) {
-    $variables['attributes']['class'][] = Html::getClass('view-mode-' . $variables['elements']['#view_mode']);
-  }
-
-  // Banner layout vars.
-  $variables['layout'] = 'default';
-  if ($node = \Drupal::routeMatch()->getParameter('node')) {
-    if ($node->hasField('field_multibanner_layout')) {
-      $variables['layout'] = $node->get('field_multibanner_layout')->getValue()[0]['value'];
-    }
-  }
+  \Drupal::service(ThemeHooks::class)->preprocessMultibanner($variables);
 }
 
 /**
@@ -82,38 +56,12 @@ function template_preprocess_multibanner(&$variables) {
  *   - view: A View object.
  */
 function template_preprocess_views_view_multibanner(&$variables) {
-  $handler = $variables['view']->style_plugin;
-
-  // Fetch classes from handler options.
-  if ($handler->options['class']) {
-    $class = explode(' ', $handler->options['class']);
-    $class = array_map('\Drupal\Component\Utility\Html::cleanCssIdentifier', $class);
-    $variables['list']['attributes'] = new Attribute(['class' => $class]);
-  }
-
-  // Fetch wrapper classes from handler options.
-  if ($handler->options['wrapper_class']) {
-    $wrapper_class = explode(' ', $handler->options['wrapper_class']);
-    $variables['attributes']['class'] = array_map('\Drupal\Component\Utility\Html::cleanCssIdentifier', $wrapper_class);
-  }
-  else {
-    $variables['attributes']['class'] = [];
-  }
-
-  // Banner layout vars.
-  $variables['layout'] = 'default';
-  if ($node = \Drupal::routeMatch()->getParameter('node')) {
-    if ($node->hasField('field_multibanner_layout')) {
-      $variables['layout'] = $node->get('field_multibanner_layout')->getValue()[0]['value'];
-    }
-  }
-
-  // Banner count class vars.
-  $banner_count = count($variables['view']->result);
-  $variables['banner_count'] = $banner_count;
-  $variables['attributes']['class'][] = 'multibanner';
-  $variables['attributes']['class'][] = 'multibanner-total-' . $banner_count;
-
-  // Finish rendering.
+  \Drupal::service(ThemeHooks::class)->_preprocessViewsViewMultibanner($variables);
+  // Finish rendering. Calling the deprecated procedural function is required for
+  // Drupal 10 back-compat. On Drupal 11 this whole shim is unused: the 'initial
+  // preprocess' entry in ThemeHooks::theme() makes the theme registry skip
+  // template_preprocess_HOOK (see \Drupal\Core\Theme\Registry), so the OOP
+  // ThemeHooks::preprocessViewsViewMultibanner() path runs instead.
+  // @phpstan-ignore function.deprecated
   template_preprocess_views_view_unformatted($variables);
 }
