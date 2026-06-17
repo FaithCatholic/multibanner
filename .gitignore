@@ -1,3 +1,11 @@
 .DS_Store
 Thumbs.db
 .sass-cache
+
+# files from ddev poser
+# https://github.com/ddev/ddev-drupal-contrib
+/web
+/recipes
+/vendor
+/phpcs.xml.dist
+/phpstan*
