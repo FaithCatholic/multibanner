@@ -9,12 +9,18 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Template\Attribute;
 use Drupal\views\Hook\ViewsThemeHooks;
 
+/**
+ * Theme hook implementations for the multibanner module.
+ */
 class ThemeHooks {
 
   public function __construct(
     protected RouteMatchInterface $routeMatch,
   ) {}
 
+  /**
+   * Implements hook_theme().
+   */
   #[Hook('theme')]
   public function theme() : array {
     return [
@@ -29,6 +35,17 @@ class ThemeHooks {
     ];
   }
 
+  /**
+   * Prepares variables for multibanner templates.
+   *
+   * Default template: multibanner.html.twig.
+   *
+   * @param array $variables
+   *   An associative array containing:
+   *   - elements: An array of elements to display in view mode.
+   *   - multibanner: The multibanner object.
+   *   - view_mode: View mode; e.g., 'full', 'teaser', etc.
+   */
   public function preprocessMultibanner(array &$variables): void {
     /** @var \Drupal\multibanner\MultibannerInterface $multibanner */
     $multibanner = $variables['elements']['#multibanner'];
@@ -91,35 +108,35 @@ class ThemeHooks {
   public function _preprocessViewsViewMultibanner(array &$variables): void {
     $handler = $variables['view']->style_plugin;
 
-      // Fetch classes from handler options.
-      if ($handler->options['class']) {
-        $class = explode(' ', $handler->options['class']);
-        $class = array_map('\Drupal\Component\Utility\Html::cleanCssIdentifier', $class);
-        $variables['list']['attributes'] = new Attribute(['class' => $class]);
-      }
+    // Fetch classes from handler options.
+    if ($handler->options['class']) {
+      $class = explode(' ', $handler->options['class']);
+      $class = array_map('\Drupal\Component\Utility\Html::cleanCssIdentifier', $class);
+      $variables['list']['attributes'] = new Attribute(['class' => $class]);
+    }
 
-      // Fetch wrapper classes from handler options.
-      if ($handler->options['wrapper_class']) {
-        $wrapper_class = explode(' ', $handler->options['wrapper_class']);
-        $variables['attributes']['class'] = array_map('\Drupal\Component\Utility\Html::cleanCssIdentifier', $wrapper_class);
-      }
-      else {
-        $variables['attributes']['class'] = [];
-      }
+    // Fetch wrapper classes from handler options.
+    if ($handler->options['wrapper_class']) {
+      $wrapper_class = explode(' ', $handler->options['wrapper_class']);
+      $variables['attributes']['class'] = array_map('\Drupal\Component\Utility\Html::cleanCssIdentifier', $wrapper_class);
+    }
+    else {
+      $variables['attributes']['class'] = [];
+    }
 
-      // Banner layout vars.
-      $variables['layout'] = 'default';
-      if ($node = $this->routeMatch->getParameter('node')) {
-        if ($node->hasField('field_multibanner_layout')) {
-          $variables['layout'] = $node->get('field_multibanner_layout')->getValue()[0]['value'];
-        }
+    // Banner layout vars.
+    $variables['layout'] = 'default';
+    if ($node = $this->routeMatch->getParameter('node')) {
+      if ($node->hasField('field_multibanner_layout')) {
+        $variables['layout'] = $node->get('field_multibanner_layout')->getValue()[0]['value'];
       }
+    }
 
-      // Banner count class vars.
-      $banner_count = count($variables['view']->result);
-      $variables['banner_count'] = $banner_count;
-      $variables['attributes']['class'][] = 'multibanner';
-      $variables['attributes']['class'][] = 'multibanner-total-' . $banner_count;
+    // Banner count class vars.
+    $banner_count = count($variables['view']->result);
+    $variables['banner_count'] = $banner_count;
+    $variables['attributes']['class'][] = 'multibanner';
+    $variables['attributes']['class'][] = 'multibanner-total-' . $banner_count;
   }
 
 }

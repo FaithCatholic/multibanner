@@ -12,7 +12,6 @@ use Drupal\multibanner\MultibannerTypeBase;
 use Drupal\video_embed_field\ProviderManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Config\Config;
-use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
 
 /**
  * Provides multibanner type plugin for video embed field.
