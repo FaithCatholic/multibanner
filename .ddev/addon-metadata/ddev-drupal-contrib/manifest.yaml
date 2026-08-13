@@ -1,7 +1,7 @@
 name: ddev-drupal-contrib
 repository: ddev/ddev-drupal-contrib
-version: 1.1.5
-install_date: "2026-06-17T11:52:07-03:00"
+version: 1.1.6
+install_date: "2026-08-13T20:37:31-03:00"
 project_files:
     - commands/host/core-version
     - commands/web/eslint
