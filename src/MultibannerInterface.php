@@ -65,7 +65,8 @@ interface MultibannerInterface extends ContentEntityInterface, EntityChangedInte
   /**
    * Returns the multibanner published status indicator.
    *
-   * Unpublished multibanner are only visible to their authors and to administrators.
+   * Unpublished multibanner are only visible to their authors and to
+   * administrators.
    *
    * @return bool
    *   TRUE if the multibanner is published.
@@ -76,7 +77,8 @@ interface MultibannerInterface extends ContentEntityInterface, EntityChangedInte
    * Sets the published status of a multibanner.
    *
    * @param bool $published
-   *   TRUE to set this multibanner to published, FALSE to set it to unpublished.
+   *   TRUE to set this multibanner to published, FALSE to set it to
+   *   unpublished.
    *
    * @return \Drupal\multibanner\MultibannerInterface
    *   The called multibanner.
@@ -92,8 +94,9 @@ interface MultibannerInterface extends ContentEntityInterface, EntityChangedInte
   public function getType();
 
   /**
-   * Automatically determines the most appropriate thumbnail and sets
-   * "thumbnail" field.
+   * Determines the most appropriate thumbnail.
+   *
+   * The result is stored in the "thumbnail" field.
    */
   public function automaticallySetThumbnail();
 

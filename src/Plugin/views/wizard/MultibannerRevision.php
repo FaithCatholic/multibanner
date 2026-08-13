@@ -17,11 +17,15 @@ class MultibannerRevision extends WizardPluginBase {
 
   /**
    * Set the created column.
+   *
+   * @var string
    */
   protected $createdColumn = 'changed';
 
   /**
    * Set default values for the filters.
+   *
+   * @var array
    */
   protected $filters = [
     'status' => [

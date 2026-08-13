@@ -117,7 +117,7 @@ function multibanner_field_widget_form_alter(&$element, FormStateInterface $form
       }
       else {
         $left = (string) 9 - $num_entities;
-        $element['#description'] = t('<p><em>You may add up to <strong style="color:green;">' . $left . ' additional banner(s)</strong>. A total of 9 is allowed.</em></p>');
+        $element['#description'] = t('<p><em>You may add up to <strong style="color:green;">@left additional banner(s)</strong>. A total of 9 is allowed.</em></p>', ['@left' => $left]);
       }
     }
   }

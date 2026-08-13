@@ -96,7 +96,7 @@ class MultibannerBundle extends ConfigEntityBundleBase implements MultibannerBun
   public $queue_thumbnail_downloads = FALSE;
 
   /**
-   * Default value of the 'Create new revision' checkbox of this multibanner bundle.
+   * Default value of this bundle's 'Create new revision' checkbox.
    *
    * @var bool
    */

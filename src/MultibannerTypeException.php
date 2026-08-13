@@ -3,8 +3,9 @@
 namespace Drupal\multibanner;
 
 /**
- * Generic Plugin exception class to be thrown when no more specific class
- * is applicable.
+ * Generic plugin exception class.
+ *
+ * Thrown when no more specific class is applicable.
  */
 class MultibannerTypeException extends \Exception {
 

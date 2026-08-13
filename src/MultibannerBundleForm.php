@@ -42,6 +42,8 @@ class MultibannerBundleForm extends EntityForm {
    *
    * @param \Drupal\multibanner\MultibannerTypeManager $multibanner_type_manager
    *   Multibanner type manager.
+   * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager
+   *   Entity field manager service.
    */
   public function __construct(MultibannerTypeManager $multibanner_type_manager, EntityFieldManagerInterface $entity_field_manager) {
     $this->multibannerTypeManager = $multibanner_type_manager;

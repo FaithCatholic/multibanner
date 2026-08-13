@@ -60,7 +60,7 @@ abstract class MultibannerTypeBase extends PluginBase implements MultibannerType
    * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager
    *   Entity field manager service.
    * @param \Drupal\Core\Config\Config $config
-   *   multibanner config object.
+   *   Multibanner config object.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager, Config $config) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);

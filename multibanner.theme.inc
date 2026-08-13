@@ -56,12 +56,12 @@ function template_preprocess_multibanner(&$variables) {
  *   - view: A View object.
  */
 function template_preprocess_views_view_multibanner(&$variables) {
-  \Drupal::service(ThemeHooks::class)->_preprocessViewsViewMultibanner($variables);
-  // Finish rendering. Calling the deprecated procedural function is required for
-  // Drupal 10 back-compat. On Drupal 11 this whole shim is unused: the 'initial
-  // preprocess' entry in ThemeHooks::theme() makes the theme registry skip
-  // template_preprocess_HOOK (see \Drupal\Core\Theme\Registry), so the OOP
-  // ThemeHooks::preprocessViewsViewMultibanner() path runs instead.
+  \Drupal::service(ThemeHooks::class)->doPreprocessViewsViewMultibanner($variables);
+  // Finish rendering. Calling the deprecated procedural function is required
+  // for Drupal 10 back-compat. On Drupal 11 this whole shim is unused: the
+  // 'initial preprocess' entry in ThemeHooks::theme() makes the theme registry
+  // skip template_preprocess_HOOK (see \Drupal\Core\Theme\Registry), so the
+  // OOP ThemeHooks::preprocessViewsViewMultibanner() path runs instead.
   // @phpstan-ignore function.deprecated
   template_preprocess_views_view_unformatted($variables);
 }

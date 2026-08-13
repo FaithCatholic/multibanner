@@ -53,7 +53,7 @@ class Image extends MultibannerTypeBase {
    * @param \Drupal\Core\Image\ImageFactory $image_factory
    *   The image factory.
    * @param \Drupal\Core\Config\Config $config
-   *   multibanner entity config object.
+   *   Multibanner entity config object.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager, ImageFactory $image_factory, Config $config) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $entity_type_manager, $entity_field_manager, $config);

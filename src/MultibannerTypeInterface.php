@@ -44,15 +44,16 @@ interface MultibannerTypeInterface extends PluginInspectionInterface, Configurab
    * Attaches type-specific constraints to multibanner.
    *
    * @param MultibannerInterface $multibanner
-   *   multibanner.
+   *   Multibanner.
    */
   public function attachConstraints(MultibannerInterface $multibanner);
 
   /**
    * Gets thumbnail image.
    *
-   * Multibanner type plugin is responsible for returning URI of the generic thumbnail
-   * if no other is available. This functions should always return a valid URI.
+   * Multibanner type plugin is responsible for returning URI of the generic
+   * thumbnail if no other is available. This functions should always return a
+   * valid URI.
    *
    * @param MultibannerInterface $multibanner
    *   Multibanner.
@@ -73,8 +74,8 @@ interface MultibannerTypeInterface extends PluginInspectionInterface, Configurab
   /**
    * Provide a default name for the multibanner.
    *
-   * Plugins defining multibanner bundles are suggested to override this method and
-   * provide a default name, to be used when there is no user-defined label
+   * Plugins defining multibanner bundles are suggested to override this method
+   * and provide a default name, to be used when there is no user-defined label
    * available.
    *
    * @param \Drupal\multibanner\MultibannerInterface $multibanner

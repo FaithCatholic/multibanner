@@ -82,11 +82,11 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
   const NOT_PUBLISHED = 0;
 
   /**
-   * A queue based multibanner operation to download thumbnails is being performed.
+   * Whether a queued thumbnail download operation is being performed.
    *
    * @var bool
    */
-  protected $queued_thumbnail_download = FALSE;
+  protected $queuedThumbnailDownload = FALSE;
 
   /**
    * {@inheritdoc}
@@ -136,7 +136,7 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
    * {@inheritdoc}
    */
   public function setQueuedThumbnailDownload() {
-    $this->queued_thumbnail_download = TRUE;
+    $this->queuedThumbnailDownload = TRUE;
   }
 
   /**
@@ -167,14 +167,14 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
   public function preSave(EntityStorageInterface $storage) {
     parent::preSave($storage);
 
-    // If no revision author has been set explicitly, make the multibanner owner the
-    // revision author.
+    // If no revision author has been set explicitly, make the multibanner
+    // owner the revision author.
     if (!$this->get('revision_uid')->entity) {
       $this->set('revision_uid', $this->getPublisherId());
     }
 
     // Set thumbnail.
-    if (!$this->get('thumbnail')->entity || !empty($this->queued_thumbnail_download)) {
+    if (!$this->get('thumbnail')->entity || !empty($this->queuedThumbnailDownload)) {
       $this->automaticallySetThumbnail();
     }
 
@@ -190,7 +190,8 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
       }
     }
 
-    // Try to set a default name for this multibanner, if there is no label provided.
+    // Try to set a default name for this multibanner, if there is no label
+    // provided.
     if (empty($this->label())) {
       $this->set('name', $this->getType()->getDefaultName($this));
     }

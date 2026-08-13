@@ -83,10 +83,11 @@ class ThemeHooks {
    *   - view: A View object.
    */
   public function preprocessViewsViewMultibanner(array &$variables): void {
-    $this->_preprocessViewsViewMultibanner($variables);
-    // ViewsThemeHooks only exists on Drupal 11, where this method runs. Fetched
-    // lazily (not injected) so the class stays instantiable on Drupal 10, whose
-    // procedural path uses template_preprocess_views_view_unformatted() instead.
+    $this->doPreprocessViewsViewMultibanner($variables);
+    // ViewsThemeHooks only exists on Drupal 11, where this method runs.
+    // Fetched lazily (not injected) so the class stays instantiable on Drupal
+    // 10, whose procedural path uses
+    // template_preprocess_views_view_unformatted() instead.
     // @phpstan-ignore globalDrupalDependencyInjection.useDependencyInjection
     \Drupal::service(ViewsThemeHooks::class)->preprocessViewsViewUnformatted($variables);
   }
@@ -105,7 +106,7 @@ class ThemeHooks {
    *
    * @see template_preprocess_views_view_multibanner()
    */
-  public function _preprocessViewsViewMultibanner(array &$variables): void {
+  public function doPreprocessViewsViewMultibanner(array &$variables): void {
     $handler = $variables['view']->style_plugin;
 
     // Fetch classes from handler options.
