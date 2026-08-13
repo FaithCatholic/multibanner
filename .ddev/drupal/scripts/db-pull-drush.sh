@@ -13,6 +13,7 @@ Usage: ${DDEV_DRUPAL_HELP_CMD-$0} [options]
   -h                This help text.
   -a ALIAS          Required! The remote drush alias (likely ssh) from where the database will be dumped. i.e. @live
   -n                Do not download, expect the dump to be already downloaded.
+  -d                Download only, do not import the dump.
   -f FILE           Alternatively, provide a gzip'ed dump to import. Implies -n.
   -o                Import only, do not run post-import-db hooks.
   -v                Add -vvvv to drush commands
@@ -24,12 +25,13 @@ function print_help() {
 }
 
 download=true
+download_only=
 file=
 post_import=true
 alias=
 verbose=
 
-while getopts ":hvnoa:f:" option; do
+while getopts ":hvnoda:f:" option; do
   case ${option} in
     v)
       verbose="-vvvv"
@@ -43,6 +45,9 @@ while getopts ":hvnoa:f:" option; do
       ;;
     n)
       download=
+      ;;
+    d)
+      download_only=true
       ;;
     f)
       download=
@@ -105,6 +110,11 @@ if [[ "$download" == "true"  ]]; then
     "
     gum log --level info Downloading remote database from ${alias} to ${sql_filename_gz}...
   drush $verbose rsync ${alias}:/tmp/${sql_filename_gz} . -y -- --delete
+fi
+
+if [[ -n $download_only ]]; then
+  gum log --level info -- Download only, skipping import. Dump available at ${sql_filename_gz}.
+  exit 0
 fi
 
 if [[ ! -f ${sql_filename_gz} ]]; then

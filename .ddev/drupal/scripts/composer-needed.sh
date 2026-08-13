@@ -55,12 +55,95 @@ done < <(find "$config_path" -type f \( -name 'core.extension.yml' -o -name 'con
 
 sort -u -o "$enabled_modules_file" "$enabled_modules_file"
 
+# Install base dirs come straight from composer.json's installer-paths, so we
+# make no assumption about web/, docroot/, contrib/ vs custom/, etc.
+install_base_dirs=()
+while IFS= read -r base; do
+  [ -z "$base" ] && continue
+  if [ -n "$composer_root" ]; then
+    install_base_dirs+=("$composer_root/$base")
+  else
+    install_base_dirs+=("$base")
+  fi
+done < <(
+  php -r '
+$composer_file = $argv[1];
+$composer = json_decode(file_get_contents($composer_file), TRUE);
+$paths = $composer["extra"]["installer-paths"] ?? [];
+$bases = [];
+foreach (array_keys($paths) as $pattern) {
+  $pos = strpos($pattern, "{");
+  if ($pos === FALSE) {
+    continue;
+  }
+  $base = rtrim(substr($pattern, 0, $pos), "/");
+  if ($base !== "") {
+    $bases[$base] = TRUE;
+  }
+}
+foreach (array_keys($bases) as $base) {
+  echo $base, PHP_EOL;
+}
+' "$composer_file"
+)
+
+# Resolve a composer package name to the module/theme machine names it ships.
+# A package directory can hold many submodules (e.g. domain, domain_extras) or
+# a single module whose machine name differs from the package name (e.g. etm ->
+# enhanced_taxonomy_manager), so we read every *.info.yml it installs. Test
+# fixtures under tests/ are excluded. Falls back to the package name when the
+# package is not installed locally or ships no info.yml.
+package_machine_names() {
+  local module="$1"
+  local pkg_dir=""
+  local base
+
+  for base in "${install_base_dirs[@]}"; do
+    if [ -d "$base/$module" ]; then
+      pkg_dir="$base/$module"
+      break
+    fi
+  done
+
+  if [ -z "$pkg_dir" ]; then
+    echo "$module"
+    return
+  fi
+
+  local found=0
+  local info_file
+  while IFS= read -r -d '' info_file; do
+    basename "$info_file" .info.yml
+    found=1
+  done < <(find "$pkg_dir" -name '*.info.yml' -not -path '*/tests/*' -print0)
+
+  if [ "$found" -eq 0 ]; then
+    echo "$module"
+  fi
+}
+
 while IFS=: read -r dependency_type module; do
-  if grep -Fxq -- "$module" "$enabled_modules_file"; then
+  enabled_matches=()
+  while IFS= read -r machine_name; do
+    [ -z "$machine_name" ] && continue
+    if grep -Fxq -- "$machine_name" "$enabled_modules_file"; then
+      enabled_matches+=("$machine_name")
+    fi
+  done < <(package_machine_names "$module")
+
+  if [ "${#enabled_matches[@]}" -gt 0 ]; then
+    # Annotate when the enabled module name(s) differ from the package name,
+    # e.g. etm (enhanced_taxonomy_manager) or domain_extras (domain_sso, ...).
+    label="$module"
+    if ! printf '%s\n' "${enabled_matches[@]}" | grep -Fxq -- "$module"; then
+      matched_list="$(printf '%s, ' "${enabled_matches[@]}")"
+      matched_list="${matched_list%, }"
+      label="$module ($matched_list)"
+    fi
     if [ "$dependency_type" = "require-dev" ]; then
-      active_dev_modules+=("$module")
+      active_dev_modules+=("$label")
     else
-      active_require_modules+=("$module")
+      active_require_modules+=("$label")
     fi
   else
     if [ "$dependency_type" = "require-dev" ]; then
