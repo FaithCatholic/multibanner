@@ -25,7 +25,7 @@ FROM pimp-my-shell-base AS pimp-my-shell-starship
 SHELL ["/bin/bash", "-c"]
 RUN <<EOF
 set -eux
-STARSHIP_VERSION=1.25.1
+STARSHIP_VERSION=1.26.0
 AARCH=$(uname -m)
 AARCH=${AARCH/i386/i686}
 curl-pimp-my-shell -o starship.tar.gz https://github.com/starship/starship/releases/download/v${STARSHIP_VERSION}/starship-${AARCH}-unknown-linux-musl.tar.gz
@@ -52,7 +52,7 @@ FROM pimp-my-shell-base AS pimp-my-shell-fzf
 SHELL ["/bin/bash", "-c"]
 RUN <<EOF
 set -eux
-FZF_VERSION=0.73.1
+FZF_VERSION=0.74.2
 AARCH=$(uname -m)
 AARCH=${AARCH/aarch64/arm64}
 AARCH=${AARCH/x86_64/amd64}
@@ -65,7 +65,7 @@ EOF
 FROM pimp-my-shell-base AS pimp-my-shell-fzfgit
 SHELL ["/bin/bash", "-c"]
 RUN <<EOF
-FZFGIT_SHA1=d76cd4df21f2ca5aafeab8b31118c4df133472c0
+FZFGIT_SHA1=d5b0a5dcd1e073b8bfca45338d5dfad3e5642471
 curl-pimp-my-shell -o fzf-git-sh.tar.gz https://github.com/junegunn/fzf-git.sh/archive/${FZFGIT_SHA1}.tar.gz
 tar -zxf fzf-git-sh.tar.gz --strip-components=1 -C /opt
 rm fzf-git-sh.tar.gz
@@ -76,7 +76,7 @@ FROM pimp-my-shell-base AS pimp-my-shell-eza
 SHELL ["/bin/bash", "-c"]
 RUN <<EOF
 set -eux
-EZA_VERSION=0.23.4
+EZA_VERSION=0.23.5
 curl-pimp-my-shell -o eza.tar.gz https://github.com/eza-community/eza/releases/download/v${EZA_VERSION}/eza_`uname -m`-unknown-linux-gnu.tar.gz
 curl-pimp-my-shell -o eza-completions.tar.gz https://github.com/eza-community/eza/releases/download/v${EZA_VERSION}/completions-${EZA_VERSION}.tar.gz
 tar -zxf eza.tar.gz -C /usr/local/bin
@@ -88,41 +88,28 @@ EOF
 
 # fish
 #
-# Opensuse doesn't keep older files of the fish build, so this will always use
-# the latest regardless of the fish version specified below in the
-# `apt satisfy` command. However, this allows for proper docker build cache
-# busting ensuring you always have the last version when it's updated.
+# Opensuse publishes architectures independently. This key tracks both versions
+# so either changing invalidates this RUN and installs the latest available fish
+# package for the current architecture.
 FROM pimp-my-shell-base AS pimp-my-shell-fish
 SHELL ["/bin/bash", "-c"]
 RUN <<EOF
-set -eux
-FISH_VERSION=4.7.1-1
+set -euxo pipefail
+FISH_CACHE_KEY=amd64:4.8.0-1,arm64:4.8.1-1
 DEBIAN=$(lsb_release -rs)
 echo "deb http://download.opensuse.org/repositories/shells:/fish:/release:/4/Debian_${DEBIAN}/ /" | sudo tee /etc/apt/sources.list.d/shells:fish:release:4.list
-curl-pimp-my-shell -sS https://download.opensuse.org/repositories/shells:fish:release:4/Debian_${DEBIAN}/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_fish_release_4.gpg > /dev/null
+curl-pimp-my-shell -fsS https://download.opensuse.org/repositories/shells:fish:release:4/Debian_${DEBIAN}/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_fish_release_4.gpg > /dev/null
 apt update
-apt -o APT::Install-Recommends=false satisfy -y "fish (>=${FISH_VERSION})"
+apt-get install -y --no-install-recommends fish
 rm -rf /var/lib/apt/lists/*
 EOF
 
-FROM pimp-my-shell-fish AS pimp-my-shell-fisher
+FROM pimp-my-shell-fish AS pimp-my-shell-fisher-plugins
 SHELL ["/bin/fish", "-c"]
 RUN <<EOF
 set fish_trace 1
 export FISHER_VERSION=4.4.8
-curl-pimp-my-shell -o fisher.tar.gz https://github.com/jorgebucaran/fisher/archive/refs/tags/$FISHER_VERSION.tar.gz
-mkdir -p /opt/fisher
-tar -xzf fisher.tar.gz --strip-components=1 -C /opt/fisher
-cp -R /opt/fisher/functions /root/.config/fish/functions
-cp -R /opt/fisher/completions /root/.config/fish/completions
-rm fisher.tar.gz
-rm -fr /opt/fisher
-EOF
-
-FROM pimp-my-shell-fisher AS pimp-my-shell-fisher-plugins
-SHELL ["/bin/fish", "-c"]
-RUN <<EOF
-set fish_trace 1
+curl-pimp-my-shell https://raw.githubusercontent.com/jorgebucaran/fisher/{$FISHER_VERSION}/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 export BASS_VERSION=1.0
 fisher install edc/bass@v$BASS_VERSION
 export TIDE_VERSION=6.2.0
@@ -135,7 +122,7 @@ FROM pimp-my-shell-base AS pimp-my-shell-zlua
 SHELL ["/bin/bash", "-c"]
 RUN <<EOF
 set -eux
-ZLUA_VERSION=v1.8.25
+ZLUA_VERSION=1.8.26
 mkdir -p /opt/z.lua
 cd /opt/z.lua
 curl-pimp-my-shell -o zlua.zip https://github.com/skywind3000/z.lua/archive/refs/tags/${ZLUA_VERSION}.zip
@@ -149,7 +136,7 @@ FROM pimp-my-shell-base AS pimp-my-shell-xterm-kitty
 SHELL ["/bin/bash", "-c"]
 RUN <<EOF
 set -eux
-KITTY_VERSION=0.47.4
+KITTY_VERSION=0.48.2
 mkdir -p /opt/kitty
 curl-pimp-my-shell -o kitty.tar.gz https://github.com/kovidgoyal/kitty/archive/v${KITTY_VERSION}.tar.gz
 tar -zxf kitty.tar.gz --strip-components=1 -C /opt/kitty
@@ -161,7 +148,7 @@ FROM pimp-my-shell-base AS pimp-my-shell-go
 SHELL ["/bin/bash", "-c"]
 RUN <<EOF
 set -eux
-GO_VERSION=1.26.4
+GO_VERSION=1.26.5
 AARCH=$(uname -m)
 AARCH=${AARCH/aarch64/arm64}
 AARCH=${AARCH/x86_64/amd64}
@@ -239,7 +226,7 @@ FROM pimp-my-shell-base AS pimp-my-shell-rust
 SHELL ["/bin/bash", "-c"]
 RUN <<EOF
 set -eux
-RUST_VERSION=1.96.0
+RUST_VERSION=1.97.1
 curl-pimp-my-shell -sS https://sh.rustup.rs/ | sh -s -- --profile minimal --default-toolchain=${RUST_VERSION} -y
 EOF
 
@@ -248,7 +235,7 @@ FROM pimp-my-shell-base AS pimp-my-shell-lazygit
 SHELL ["/bin/bash", "-c"]
 RUN <<EOF
 set -eux
-LAZYGIT_VERSION=0.62.2
+LAZYGIT_VERSION=0.64.0
 AARCH=$(uname -m)
 AARCH=${AARCH/aarch64/arm64}
 AARCH=${AARCH/i386/32-bit}
@@ -263,7 +250,7 @@ FROM pimp-my-shell-base AS pimp-my-shell-ov
 SHELL ["/bin/bash", "-c"]
 RUN <<EOF
 set -eux
-OV_VERSION=0.53.0
+OV_VERSION=0.54.0
 AARCH=$(uname -m)
 AARCH=${AARCH/aarch64/arm64}
 AARCH=${AARCH/x86_64/amd64}
@@ -290,7 +277,7 @@ FROM pimp-my-shell-base AS pimp-my-shell-gh
 SHELL ["/bin/bash", "-c"]
 RUN <<EOF
 set -eux
-GH_VERSION=2.94.0
+GH_VERSION=2.97.0
 AARCH=$(uname -m)
 AARCH=${AARCH/aarch64/arm64}
 AARCH=${AARCH/x86_64/amd64}
@@ -333,7 +320,7 @@ RUN <<EOF
 set -eux
 apt-get update
 apt-get install -y --no-install-recommends build-essential cmake libncurses-dev ninja-build
-MULTITAIL_SHA1=20242703c9c564492a4596410157c58838ba810b
+MULTITAIL_SHA1=fdfcd84c300147efb924a003fcf5d15b020a3f7a
 mkdir -p /opt/multitail
 cd /opt/multitail
 curl-pimp-my-shell -o multitail.tar.gz "https://github.com/folkertvanheusden/multitail/tarball/${MULTITAIL_SHA1}"
@@ -351,7 +338,7 @@ RUN <<EOF
 set -eux
 apt-get update
 apt-get install -y --no-install-recommends libevent-dev ncurses-dev build-essential bison pkg-config
-TMUX_VERSION=3.6b
+TMUX_VERSION=3.7b
 mkdir -p /opt/tmux
 cd /opt/tmux
 curl-pimp-my-shell -o tmux.tar.gz "https://github.com/tmux/tmux/releases/download/${TMUX_VERSION}/tmux-${TMUX_VERSION}.tar.gz"
@@ -368,7 +355,7 @@ FROM pimp-my-shell-base AS pimp-my-shell-doctl
 SHELL ["/bin/bash", "-c"]
 RUN <<EOF
 set -eux
-DOCTL_VERSION=1.162.0
+DOCTL_VERSION=1.166.0
 AARCH=$(uname -m)
 AARCH=${AARCH/aarch64/arm64}
 AARCH=${AARCH/x86_64/amd64}
@@ -382,7 +369,7 @@ FROM pimp-my-shell-base AS pimp-my-shell-task
 SHELL ["/bin/bash", "-c"]
 RUN <<EOF
 set -eux
-TASK_VERSION=3.51.1
+TASK_VERSION=3.52.0
 AARCH=$(uname -m)
 AARCH=${AARCH/aarch64/arm64}
 AARCH=${AARCH/x86_64/amd64}
