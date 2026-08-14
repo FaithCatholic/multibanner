@@ -105,8 +105,11 @@ class Image extends MultibannerTypeBase {
     $source_field = $this->configuration['source_field'];
 
     // Get the file, image and exif data.
-    /** @var \Drupal\file\FileInterface $file */
+    /** @var \Drupal\file\FileInterface|null $file */
     $file = $multibanner->{$source_field}->entity;
+    if (!$file) {
+      return FALSE;
+    }
     $image = $this->imageFactory->get($file->getFileUri());
     $uri = $file->getFileUri();
 
