@@ -53,7 +53,7 @@ class YouTubeMinimal extends ProviderPluginBase {
    */
   protected function getTimeIndex() {
     preg_match('/[&\?]t=(?<timeindex>\d+)/', $this->getInput(), $matches);
-    return $matches['timeindex'] ?? 0;
+    return (int) ($matches['timeindex'] ?? 0);
   }
 
   /**

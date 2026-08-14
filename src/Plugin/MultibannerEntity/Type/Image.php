@@ -134,7 +134,11 @@ class Image extends MultibannerTypeBase {
           return $this->getExifField($uri, 'Model');
 
         case 'created':
-          $date = new DrupalDateTime($this->getExifField($uri, 'DateTimeOriginal'));
+          $exif_date = $this->getExifField($uri, 'DateTimeOriginal');
+          if (!$exif_date) {
+            return FALSE;
+          }
+          $date = new DrupalDateTime($exif_date);
           return $date->getTimestamp();
 
         case 'iso':
@@ -239,13 +243,13 @@ class Image extends MultibannerTypeBase {
    * @param string $uri
    *   The uri for the file that we are getting the Exif.
    *
-   * @return array|bool
+   * @return array
    *   An associative array where the array indexes are the header names and
-   *   the array values are the values associated with those headers or FALSE
-   *   if the data can't be read.
+   *   the array values are the values associated with those headers, or an
+   *   empty array if the data can't be read.
    */
   protected function getExif($uri) {
-    return exif_read_data($uri, 'EXIF');
+    return exif_read_data($uri, 'EXIF') ?: [];
   }
 
   /**

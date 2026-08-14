@@ -92,6 +92,10 @@ class VideoEmbedField extends MultibannerTypeBase {
     }
     $provider = $this->providerManager->loadProviderFromInput($url);
     $definition = $this->providerManager->loadDefinitionFromInput($url);
+    // Both return FALSE when no provider handles the URL.
+    if (!$provider || !$definition) {
+      return FALSE;
+    }
     switch ($name) {
       case 'id':
         return $provider->getIdFromInput($url);
