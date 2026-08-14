@@ -75,7 +75,7 @@ class YouTubeMinimal extends ProviderPluginBase {
     $high_resolution = sprintf($url, $this->getVideoId(), 'maxresdefault');
     $backup = sprintf($url, $this->getVideoId(), 'mqdefault');
     try {
-      $this->httpClient->head($high_resolution);
+      $this->httpClient->request('HEAD', $high_resolution);
       return $high_resolution;
     }
     catch (\Exception $e) {

@@ -31,11 +31,11 @@ class DeleteMultiple extends ConfirmFormBase {
   protected $tempStoreFactory;
 
   /**
-   * The entity storage.
+   * The entity type manager.
    *
-   * @var \Drupal\Core\Entity\EntityStorageInterface
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $storage;
+  protected $entityTypeManager;
 
   /**
    * The current user.
@@ -49,14 +49,14 @@ class DeleteMultiple extends ConfirmFormBase {
    *
    * @param \Drupal\Core\TempStore\PrivateTempStoreFactory $temp_store_factory
    *   The tempstore factory.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $manager
-   *   The entity manager.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
    * @param \Drupal\Core\Session\AccountInterface $current_user
    *   The current user.
    */
-  public function __construct(PrivateTempStoreFactory $temp_store_factory, EntityTypeManagerInterface $manager, AccountInterface $current_user) {
+  public function __construct(PrivateTempStoreFactory $temp_store_factory, EntityTypeManagerInterface $entity_type_manager, AccountInterface $current_user) {
     $this->tempStoreFactory = $temp_store_factory;
-    $this->storage = $manager->getStorage('multibanner');
+    $this->entityTypeManager = $entity_type_manager;
     $this->currentUser = $current_user;
   }
 
@@ -101,14 +101,18 @@ class DeleteMultiple extends ConfirmFormBase {
 
   /**
    * {@inheritdoc}
+   *
+   * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+   *   The form array, or a redirect when there is nothing to delete.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $this->entityInfo = $this->tempStoreFactory->get('multibanner_multiple_delete_confirm')->get($this->currentUser->id());
+    $this->entityInfo = $this->tempStoreFactory->get('multibanner_multiple_delete_confirm')->get((string) $this->currentUser->id());
     if (empty($this->entityInfo)) {
       return new RedirectResponse($this->getCancelUrl()->setAbsolute()->toString());
     }
     /** @var \Drupal\multibanner\MultibannerInterface[] $entities */
-    $entities = $this->storage->loadMultiple(array_keys($this->entityInfo));
+    $entities = $this->entityTypeManager->getStorage('multibanner')
+      ->loadMultiple(array_keys($this->entityInfo));
 
     $items = [];
     foreach ($this->entityInfo as $id => $langcodes) {
@@ -156,12 +160,13 @@ class DeleteMultiple extends ConfirmFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     if ($form_state->getValue('confirm') && !empty($this->entityInfo)) {
+      $storage = $this->entityTypeManager->getStorage('multibanner');
       $total_count = 0;
       $delete_entities = [];
       /** @var \Drupal\Core\Entity\ContentEntityInterface[][] $delete_translations */
       $delete_translations = [];
       /** @var \Drupal\multibanner\MultibannerInterface[] $entities */
-      $entities = $this->storage->loadMultiple(array_keys($this->entityInfo));
+      $entities = $storage->loadMultiple(array_keys($this->entityInfo));
 
       foreach ($this->entityInfo as $id => $langcodes) {
         foreach ($langcodes as $langcode) {
@@ -178,7 +183,7 @@ class DeleteMultiple extends ConfirmFormBase {
       }
 
       if ($delete_entities) {
-        $this->storage->delete($delete_entities);
+        $storage->delete($delete_entities);
         $this->logger('multibanner')->notice('Deleted @count multibanner entities.', ['@count' => count($delete_entities)]);
       }
 
@@ -202,7 +207,7 @@ class DeleteMultiple extends ConfirmFormBase {
         $this->messenger()->addMessage($this->formatPlural($total_count, 'Deleted 1 multibanner.', 'Deleted @count multibanner entities.'));
       }
 
-      $this->tempStoreFactory->get('multibanner_multiple_delete_confirm')->delete($this->currentUser->id());
+      $this->tempStoreFactory->get('multibanner_multiple_delete_confirm')->delete((string) $this->currentUser->id());
     }
 
     $form_state->setRedirect('system.admin_content');

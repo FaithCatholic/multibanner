@@ -113,7 +113,7 @@ class Image extends MultibannerTypeBase {
     // Return the field.
     switch ($name) {
       case 'mime':
-        return !$file->filemime->isEmpty() ? $file->getMimeType() : FALSE;
+        return !$file->get('filemime')->isEmpty() ? $file->getMimeType() : FALSE;
 
       case 'width':
         $width = $image->getWidth();
@@ -158,8 +158,10 @@ class Image extends MultibannerTypeBase {
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
-    /** @var \Drupal\multibanner\multibannerBundleInterface $bundle */
-    $bundle = $form_state->getFormObject()->getEntity();
+    /** @var \Drupal\Core\Entity\EntityFormInterface $form_object */
+    $form_object = $form_state->getFormObject();
+    /** @var \Drupal\multibanner\MultibannerBundleInterface $bundle */
+    $bundle = $form_object->getEntity();
     $options = [];
     $allowed_field_types = ['file', 'image'];
     foreach ($this->entityFieldManager->getFieldDefinitions('multibanner', $bundle->id()) as $field_name => $field) {
@@ -204,8 +206,9 @@ class Image extends MultibannerTypeBase {
   public function thumbnail(MultibannerInterface $multibanner) {
     $source_field = $this->configuration['source_field'];
 
-    /** @var \Drupal\file\FileInterface $file */
-    if ($file = $multibanner->{$source_field}->entity) {
+    /** @var \Drupal\file\FileInterface|null $file */
+    $file = $multibanner->{$source_field}->entity;
+    if ($file) {
       return $file->getFileUri();
     }
 
@@ -254,9 +257,12 @@ class Image extends MultibannerTypeBase {
     // retrieve the filename.
     $source_field = $this->configuration['source_field'];
 
-    /** @var \Drupal\file\FileInterface $file */
-    if (!empty($source_field) && ($file = $multibanner->{$source_field}->entity)) {
-      return $file->getFilename();
+    if (!empty($source_field)) {
+      /** @var \Drupal\file\FileInterface|null $file */
+      $file = $multibanner->{$source_field}->entity;
+      if ($file) {
+        return $file->getFilename();
+      }
     }
 
     return parent::getDefaultName($multibanner);

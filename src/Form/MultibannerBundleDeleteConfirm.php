@@ -2,10 +2,8 @@
 
 namespace Drupal\multibanner\Form;
 
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityDeleteForm;
 use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a form for multibanner bundle deletion.
@@ -13,36 +11,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class MultibannerBundleDeleteConfirm extends EntityDeleteForm {
 
   /**
-   * The query factory to create entity queries.
-   *
-   * @var \Drupal\Core\Entity\EntityStorageInterface
-   */
-  protected $queryFactory;
-
-  /**
-   * Constructs a new MultibannerBundleDeleteConfirm object.
-   *
-   * @param \Drupal\Core\Entity\EntityStorageInterface $query_factory
-   *   The entity query object.
-   */
-  public function __construct(EntityStorageInterface $query_factory) {
-    $this->queryFactory = $query_factory;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('entity.query')
-    );
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $num_entities = $this->queryFactory->get('multibanner')
+    $num_entities = $this->entityTypeManager->getStorage('multibanner')
+      ->getQuery()
+      ->accessCheck(FALSE)
       ->condition('bundle', $this->entity->id())
       ->count()
       ->execute();

@@ -20,10 +20,11 @@ class MultibannerAccessController extends EntityAccessControlHandler {
       return AccessResult::allowed()->cachePerPermissions();
     }
 
+    /** @var \Drupal\multibanner\MultibannerInterface $entity */
     $is_owner = ($account->id() && $account->id() == $entity->getPublisherId()) ? TRUE : FALSE;
     switch ($operation) {
       case 'view':
-        return AccessResult::allowedIf($account->hasPermission('view multibanner') && $entity->status->value);
+        return AccessResult::allowedIf($account->hasPermission('view multibanner') && $entity->get('status')->value);
 
       case 'update':
         return AccessResult::allowedIf(($account->hasPermission('update multibanner') && $is_owner) || $account->hasPermission('update any multibanner'))->cachePerPermissions()->cachePerUser()->addCacheableDependency($entity);

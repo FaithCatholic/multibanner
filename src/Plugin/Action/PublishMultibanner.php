@@ -30,7 +30,7 @@ class PublishMultibanner extends ActionBase {
   public function access($object, ?AccountInterface $account = NULL, $return_as_object = FALSE) {
     /** @var \Drupal\multibanner\MultibannerInterface $object */
     $result = $object->access('update', $account, TRUE)
-      ->andIf($object->status->access('edit', $account, TRUE));
+      ->andIf($object->get('status')->access('edit', $account, TRUE));
 
     return $return_as_object ? $result : $result->isAllowed();
   }

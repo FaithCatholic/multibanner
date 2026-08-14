@@ -112,7 +112,7 @@ class MultibannerBundle extends ConfigEntityBundleBase implements MultibannerBun
   /**
    * Type lazy plugin collection.
    *
-   * @var \Drupal\Core\Plugin\DefaultSingleLazyPluginCollection
+   * @var \Drupal\Core\Plugin\DefaultSingleLazyPluginCollection|null
    */
   protected $typePluginCollection;
 
@@ -126,7 +126,7 @@ class MultibannerBundle extends ConfigEntityBundleBase implements MultibannerBun
   /**
    * Default status of this multibanner bundle.
    *
-   * @var array
+   * @var bool
    */
   public $status = TRUE;
 

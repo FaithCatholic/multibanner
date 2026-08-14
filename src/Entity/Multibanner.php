@@ -129,7 +129,9 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
    * {@inheritdoc}
    */
   public function getPublisher() {
-    return $this->get('uid')->entity;
+    /** @var \Drupal\user\UserInterface|null $publisher */
+    $publisher = $this->get('uid')->entity;
+    return $publisher;
   }
 
   /**
@@ -143,7 +145,7 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
    * {@inheritdoc}
    */
   public function getPublisherId() {
-    return $this->get('uid')->target_id;
+    return (int) $this->get('uid')->target_id;
   }
 
   /**
@@ -158,7 +160,19 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
    * {@inheritdoc}
    */
   public function getType() {
-    return $this->bundle->entity->getType();
+    return $this->getMultibannerBundle()->getType();
+  }
+
+  /**
+   * Returns the bundle entity this multibanner belongs to.
+   *
+   * @return \Drupal\multibanner\Entity\MultibannerBundle
+   *   The multibanner bundle entity.
+   */
+  protected function getMultibannerBundle() {
+    /** @var \Drupal\multibanner\Entity\MultibannerBundle $bundle */
+    $bundle = $this->get('bundle')->entity;
+    return $bundle;
   }
 
   /**
@@ -180,7 +194,7 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
 
     // Try to set fields provided by type plugin and mapped in bundle
     // configuration.
-    foreach ($this->bundle->entity->field_map as $source_field => $destination_field) {
+    foreach ($this->getMultibannerBundle()->field_map as $source_field => $destination_field) {
       // Only save value in entity field if empty. Do not overwrite existing
       // data.
       // @todo We might modify that in the future but let's leave it like this
@@ -203,7 +217,7 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
    */
   public function postSave(EntityStorageInterface $storage, $update = TRUE) {
     parent::postSave($storage, $update);
-    if (!$update && $this->bundle->entity->getQueueThumbnailDownloads()) {
+    if (!$update && $this->getMultibannerBundle()->getQueueThumbnailDownloads()) {
       $queue = \Drupal::queue('multibanner_thumbnail');
       $queue->createItem(['id' => $this->id()]);
     }
@@ -213,8 +227,7 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
    * {@inheritdoc}
    */
   public function automaticallySetThumbnail() {
-    /** @var \Drupal\multibanner\MultibannerBundleInterface $bundle */
-    if ($this->bundle->entity->getQueueThumbnailDownloads() && $this->isNew()) {
+    if ($this->getMultibannerBundle()->getQueueThumbnailDownloads() && $this->isNew()) {
       $thumbnail_uri = $this->getType()->getDefaultThumbnail();
     }
     else {
@@ -255,7 +268,7 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
       // need to make sure $entity->revision_log is reset whenever it is empty.
       // Therefore, this code allows us to avoid clobbering an existing log
       // entry with an empty one.
-      $record->revision_log = $this->original->revision_log->value;
+      $record->revision_log = $this->original->get('revision_log')->value;
     }
   }
 
@@ -448,7 +461,9 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
    * {@inheritdoc}
    */
   public function getRevisionUser() {
-    return $this->revision_uid->entity;
+    /** @var \Drupal\user\UserInterface|null $user */
+    $user = $this->get('revision_uid')->entity;
+    return $user;
   }
 
   /**
@@ -463,14 +478,15 @@ class Multibanner extends ContentEntityBase implements MultibannerInterface {
    * {@inheritdoc}
    */
   public function getRevisionUserId() {
-    return $this->revision_user->target_id;
+    $target_id = $this->get('revision_user')->target_id;
+    return $target_id ? (int) $target_id : NULL;
   }
 
   /**
    * {@inheritdoc}
    */
   public function setRevisionUserId($user_id) {
-    $this->revision_user->target_id = $user_id;
+    $this->set('revision_user', $user_id);
     return $this;
   }
 

@@ -23,7 +23,7 @@ class DeleteMultibanner extends ActionBase implements ContainerFactoryPluginInte
   /**
    * The tempstore object.
    *
-   * @var \Drupal\user\SharedTempStore
+   * @var \Drupal\Core\TempStore\PrivateTempStore
    */
   protected $tempStore;
 
@@ -77,7 +77,7 @@ class DeleteMultibanner extends ActionBase implements ContainerFactoryPluginInte
       $langcode = $multibanner->language()->getId();
       $info[$multibanner->id()][$langcode] = $langcode;
     }
-    $this->tempStore->set($this->currentUser->id(), $info);
+    $this->tempStore->set((string) $this->currentUser->id(), $info);
   }
 
   /**

@@ -34,7 +34,7 @@ class MultibannerType extends Plugin {
    *
    * This will be shown when adding or configuring this display.
    *
-   * @var \Drupal\Core\Annotation\Translation (optional)
+   * @var \Drupal\Core\Annotation\Translation|string
    *
    * @ingroup plugin_translatable
    */

@@ -60,7 +60,9 @@ class VideoEmbedField extends MultibannerTypeBase {
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
 
     $options = [];
-    foreach ($this->entityFieldManager->getFieldDefinitions('multibanner', $form_state->getFormObject()->getEntity()->id()) as $field_name => $field) {
+    /** @var \Drupal\Core\Entity\EntityFormInterface $form_object */
+    $form_object = $form_state->getFormObject();
+    foreach ($this->entityFieldManager->getFieldDefinitions('multibanner', $form_object->getEntity()->id()) as $field_name => $field) {
       if ($field->getType() == 'video_embed_field') {
         $options[$field_name] = $field->getLabel();
       }
@@ -124,7 +126,7 @@ class VideoEmbedField extends MultibannerTypeBase {
    */
   public function getDefaultName(MultibannerInterface $multibanner) {
     if ($provider = $this->loadProvider($multibanner)) {
-      return $this->loadProvider($multibanner)->getName();
+      return $provider->getName();
     }
     return parent::getDefaultThumbnail();
   }
@@ -135,8 +137,8 @@ class VideoEmbedField extends MultibannerTypeBase {
    * @param \Drupal\multibanner\MultibannerInterface $multibanner
    *   The multibanner entity.
    *
-   * @return \Drupal\video_embed_field\ProviderPluginInterface
-   *   The provider plugin.
+   * @return \Drupal\video_embed_field\ProviderPluginInterface|false
+   *   The provider plugin, or FALSE if no video URL is available.
    */
   protected function loadProvider(MultibannerInterface $multibanner) {
     $video_url = $this->getVideoUrl($multibanner);

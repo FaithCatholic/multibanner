@@ -29,6 +29,7 @@ class MultibannerBundleListBuilder extends ConfigEntityListBuilder implements En
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
+    /** @var \Drupal\multibanner\MultibannerBundleInterface $entity */
     $row['title'] = [
       'data' => $entity->label(),
       'class' => ['menu-label'],

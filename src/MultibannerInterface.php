@@ -38,8 +38,8 @@ interface MultibannerInterface extends ContentEntityInterface, EntityChangedInte
   /**
    * Returns the multibanner publisher user entity.
    *
-   * @return \Drupal\user\UserInterface
-   *   The author user entity.
+   * @return \Drupal\user\UserInterface|null
+   *   The author user entity, or NULL if there is none.
    */
   public function getPublisher();
 

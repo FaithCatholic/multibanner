@@ -24,6 +24,13 @@ class MultibannerBundleForm extends EntityForm {
   protected $configurableInstances = [];
 
   /**
+   * The multibanner bundle entity being edited.
+   *
+   * @var \Drupal\multibanner\Entity\MultibannerBundle
+   */
+  protected $entity;
+
+  /**
    * Manager for multibanner type plugins.
    *
    * @var \Drupal\multibanner\MultibannerTypeManager
@@ -87,8 +94,8 @@ class MultibannerBundleForm extends EntityForm {
   public function form(array $form, FormStateInterface $form_state) {
     $form = parent::form($form, $form_state);
 
-    /** @var \Drupal\multibanner\MultibannerBundleInterface $bundle */
-    $form['#entity'] = $bundle = $this->entity;
+    $bundle = $this->entity;
+    $form['#entity'] = $bundle;
     $form_state->set('bundle', $bundle->id());
 
     if ($this->operation == 'add') {
@@ -161,21 +168,20 @@ class MultibannerBundleForm extends EntityForm {
     ];
 
     /** @var \Drupal\multibanner\MultibannerTypeInterface $plugin */
-    if ($plugin = $bundle->getType()) {
-      $plugin_configuration = (empty($this->configurableInstances[$plugin->getPluginId()]['plugin_config'])) ? $bundle->type_configuration : $this->configurableInstances[$plugin->getPluginId()]['plugin_config'];
-      /** @var \Drupal\multibanner\MultibannerTypeBase $instance */
-      $instance = $this->multibannerTypeManager->createInstance($plugin->getPluginId(), $plugin_configuration);
-      // Store the configuration for validate and submit handlers.
-      $this->configurableInstances[$plugin->getPluginId()]['plugin_config'] = $plugin_configuration;
+    $plugin = $bundle->getType();
+    $plugin_configuration = (empty($this->configurableInstances[$plugin->getPluginId()]['plugin_config'])) ? $bundle->type_configuration : $this->configurableInstances[$plugin->getPluginId()]['plugin_config'];
+    /** @var \Drupal\multibanner\MultibannerTypeBase $instance */
+    $instance = $this->multibannerTypeManager->createInstance($plugin->getPluginId(), $plugin_configuration);
+    // Store the configuration for validate and submit handlers.
+    $this->configurableInstances[$plugin->getPluginId()]['plugin_config'] = $plugin_configuration;
 
-      $form['type_configuration'][$plugin->getPluginId()] = [
-        '#type' => 'container',
-        '#attributes' => [
-          'id' => 'edit-type-configuration-plugin-wrapper',
-        ],
-      ];
-      $form['type_configuration'][$plugin->getPluginId()] += $instance->buildConfigurationForm([], $form_state);
-    }
+    $form['type_configuration'][$plugin->getPluginId()] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'id' => 'edit-type-configuration-plugin-wrapper',
+      ],
+    ];
+    $form['type_configuration'][$plugin->getPluginId()] += $instance->buildConfigurationForm([], $form_state);
 
     // Field mapping configuration.
     $form['field_mapping'] = [
@@ -191,7 +197,7 @@ class MultibannerBundleForm extends EntityForm {
       '#weight' => -50,
     ];
 
-    if (empty($plugin) || empty($plugin->providedFields())) {
+    if (empty($plugin->providedFields())) {
       $form['field_mapping']['empty_message'] = [
         '#prefix' => '<em>',
         '#suffix' => '</em>',
@@ -335,13 +341,13 @@ class MultibannerBundleForm extends EntityForm {
    * {@inheritdoc}
    */
   protected function copyFormValuesToEntity(EntityInterface $entity, array $form, FormStateInterface $form_state) {
+    /** @var \Drupal\multibanner\Entity\MultibannerBundle $entity */
     $configuration = $form_state->getValue('type_configuration');
 
     // Store previous plugin config.
     $plugin = $entity->getType()->getPluginId();
     $this->configurableInstances[$plugin]['plugin_config'] = empty($configuration[$plugin]) ? [] : $configuration[$plugin];
 
-    /** @var \Drupal\multibanner\MultibannerBundleInterface $entity */
     parent::copyFormValuesToEntity($entity, $form, $form_state);
 
     // Use type configuration for the plugin that was chosen.
@@ -362,7 +368,6 @@ class MultibannerBundleForm extends EntityForm {
    * {@inheritdoc}
    */
   public function save(array $form, FormStateInterface $form_state) {
-    /** @var \Drupal\multibanner\MultibannerBundleInterface $bundle */
     $bundle = $this->entity;
     $status = $bundle->save();
 
@@ -377,9 +382,10 @@ class MultibannerBundleForm extends EntityForm {
 
     // Override the "status" base field default value, for this bundle.
     $fields = $this->entityFieldManager->getFieldDefinitions('multibanner', $bundle->id());
+    /** @var \Drupal\multibanner\MultibannerInterface $multibanner */
     $multibanner = $this->entityTypeManager->getStorage('multibanner')->create(['bundle' => $bundle->id()]);
     $value = (bool) $form_state->getValue(['options', 'status']);
-    if ($multibanner->status->value != $value) {
+    if ($multibanner->get('status')->value != $value) {
       $fields['status']->getConfig($bundle->id())->setDefaultValue($value)->save();
     }
 
